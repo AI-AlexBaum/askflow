@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskFlow Help Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            color: #1d1d1f;
+            background: #ffffff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1d1d1f;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #0071e3;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #1d1d1f;
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .nav a:hover {
+            opacity: 1;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(180deg, #ffffff 0%, #f5f7ff 100%);
+            padding: 72px 32px 56px;
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .hero-greeting {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0071e3;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            margin-bottom: 32px;
+            color: #1d1d1f;
+        }
+
+        .search-wrapper {
+            position: relative;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #86868b;
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 20px 24px 20px 56px;
+            font-size: 17px;
+            font-family: 'Manrope', sans-serif;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            background: #ffffff;
+            color: #1d1d1f;
+            outline: none;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04), 0 0 0 0 rgba(0, 113, 227, 0);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-input::placeholder {
+            color: #86868b;
+            font-weight: 400;
+        }
+
+        .search-input:focus {
+            border-color: #0071e3;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04), 0 0 0 4px rgba(0, 113, 227, 0.12);
+        }
+
+        .search-hint {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #86868b;
+        }
+
+        .search-hint kbd {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 56px 32px 80px;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .main-content {
+            min-width: 0;
+        }
+
+        /* Product Cards */
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #86868b;
+            margin-bottom: 20px;
+        }
+
+        .product-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 56px;
+        }
+
+        .product-card {
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            padding: 28px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .product-card:hover {
+            border-color: rgba(0, 113, 227, 0.3);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .product-card-icon.drive {
+            background: #0071e3;
+        }
+
+        .product-card-icon.quote {
+            background: #30d158;
+        }
+
+        .product-card-icon svg {
+            color: #ffffff;
+        }
+
+        .product-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .product-card p {
+            font-size: 14px;
+            color: #86868b;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .article-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #86868b;
+        }
+
+        .article-count svg {
+            color: #86868b;
+        }
+
+        /* Popular Articles */
+        .popular-articles {
+            margin-bottom: 40px;
+        }
+
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .article-list-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.15s;
+        }
+
+        .article-list-item:first-child {
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .article-list-item:hover {
+            background: rgba(0, 113, 227, 0.02);
+        }
+
+        .article-number {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #86868b;
+        }
+
+        .article-list-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .article-list-info h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 2px;
+            letter-spacing: -0.2px;
+        }
+
+        .article-list-info p {
+            font-size: 13px;
+            color: #86868b;
+        }
+
+        .article-list-arrow {
+            flex-shrink: 0;
+            color: #c7c7cc;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .article-list-item:hover .article-list-arrow {
+            color: #0071e3;
+            transform: translateX(2px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #f5f7ff 0%, #eef1ff 100%);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .contact-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: #0071e3;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .contact-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .contact-card p {
+            font-size: 14px;
+            color: #86868b;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px 24px;
+            background: #0071e3;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .contact-btn:hover {
+            background: #005bb5;
+        }
+
+        .quick-links-card {
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .quick-links-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.2px;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            text-decoration: none;
+            color: #1d1d1f;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .quick-link:hover {
+            color: #0071e3;
+        }
+
+        .quick-link svg {
+            color: #86868b;
+            flex-shrink: 0;
+        }
+
+        .quick-link:hover svg {
+            color: #0071e3;
+        }
+
+        .quick-link + .quick-link {
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 32px;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer p {
+            font-size: 13px;
+            color: #86868b;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: #86868b;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #1d1d1f;
+        }
+
+        /* Floating Chat Bubble */
+        .chat-bubble {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #0071e3;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 113, 227, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 200;
+        }
+
+        .chat-bubble:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 24px rgba(0, 113, 227, 0.45);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .header-inner {
+                padding: 0 20px;
+            }
+
+            .hero {
+                padding: 48px 20px 40px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .search-input {
+                padding: 16px 20px 16px 48px;
+                font-size: 16px;
+                border-radius: 12px;
+            }
+
+            .search-hint {
+                display: none;
+            }
+
+            .main-layout {
+                grid-template-columns: 1fr;
+                padding: 40px 20px 100px;
+                gap: 40px;
+            }
+
+            .product-cards {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                margin-bottom: 40px;
+            }
+
+            .product-card {
+                padding: 24px;
+            }
+
+            .product-card-icon {
+                width: 52px;
+                height: 52px;
+                border-radius: 14px;
+            }
+
+            .footer {
+                padding: 24px 20px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .chat-bubble {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="#" class="logo">Ask<span>Flow</span></a>
+            <nav class="nav">
+                <a href="#">Products</a>
+                <a href="#">Documentation</a>
+                <a href="#">Community</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-greeting">Help Center</div>
+            <h1>Hi! How can we help?</h1>
+            <div class="search-wrapper">
+                <div class="search-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <input type="text" class="search-input" placeholder="Search for help articles...">
+            </div>
+            <p class="search-hint">Press <kbd>/</kbd> to focus search</p>
+        </div>
+    </section>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <div class="main-content">
+            <!-- Product Cards -->
+            <div class="product-cards-section">
+                <div class="section-label">Browse by product</div>
+                <div class="product-cards">
+                    <a href="#" class="product-card">
+                        <div class="product-card-icon drive">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                        </div>
+                        <h3>2drive</h3>
+                        <p>The complete package for driving instructors and driving schools</p>
+                        <div class="article-count">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            5 articles
+                        </div>
+                    </a>
+                    <a href="#" class="product-card">
+                        <div class="product-card-icon quote">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        </div>
+                        <h3>2quote</h3>
+                        <p>The smart solution for quotes and order management</p>
+                        <div class="article-count">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            2 articles
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Popular Articles -->
+            <div class="popular-articles">
+                <div class="section-label">Popular articles</div>
+                <div class="article-list">
+                    <a href="#" class="article-list-item">
+                        <div class="article-number">1</div>
+                        <div class="article-list-info">
+                            <h4>How do I add a new driving lesson?</h4>
+                            <p>2drive &middot; Planning &amp; Agenda</p>
+                        </div>
+                        <div class="article-list-arrow">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </div>
+                    </a>
+                    <a href="#" class="article-list-item">
+                        <div class="article-number">2</div>
+                        <div class="article-list-info">
+                            <h4>How do I create a new quote?</h4>
+                            <p>2quote &middot; Quotes</p>
+                        </div>
+                        <div class="article-list-arrow">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </div>
+                    </a>
+                    <a href="#" class="article-list-item">
+                        <div class="article-number">3</div>
+                        <div class="article-list-info">
+                            <h4>Can I automatically repeat lessons?</h4>
+                            <p>2drive &middot; Planning &amp; Agenda</p>
+                        </div>
+                        <div class="article-list-arrow">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </div>
+                    </a>
+                    <a href="#" class="article-list-item">
+                        <div class="article-number">4</div>
+                        <div class="article-list-info">
+                            <h4>Can I import customers from Excel?</h4>
+                            <p>2quote &middot; Customer Management</p>
+                        </div>
+                        <div class="article-list-arrow">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </div>
+                    </a>
+                    <a href="#" class="article-list-item">
+                        <div class="article-number">5</div>
+                        <div class="article-list-info">
+                            <h4>How do I send an invoice to a student?</h4>
+                            <p>2drive &middot; Billing</p>
+                        </div>
+                        <div class="article-list-arrow">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </div>
+                    </a>
+                    <a href="#" class="article-list-item">
+                        <div class="article-number">6</div>
+                        <div class="article-list-info">
+                            <h4>How do I link an instructor to a vehicle?</h4>
+                            <p>2drive &middot; Planning &amp; Agenda</p>
+                        </div>
+                        <div class="article-list-arrow">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="contact-card">
+                <div class="contact-card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <h3>Still need help?</h3>
+                <p>Our support team is available 24/7 and typically responds within 2 hours.</p>
+                <a href="#" class="contact-btn">
+                    Contact Us
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+            <div class="quick-links-card">
+                <h4>Quick Links</h4>
+                <a href="#" class="quick-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    Getting Started Guide
+                </a>
+                <a href="#" class="quick-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    API Documentation
+                </a>
+                <a href="#" class="quick-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    Product Updates
+                </a>
+                <a href="#" class="quick-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    System Status
+                </a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p>&copy; 2026 AskFlow. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Status</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Bubble -->
+    <div class="chat-bubble" title="Chat with us">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,655 @@
+/* ── Notion Clean Template ── */
+/* Font: Outfit | Minimal and content-focused */
+
+.root {
+  --bg: #ffffff;
+  --text: #37352f;
+  /* --accent is set inline via settings.primary_color */
+  --accent-light: rgba(46, 170, 220, 0.08);
+  --muted: #9b9a97;
+  --light-gray: #f7f6f3;
+  --border: #e9e9e7;
+  --sidebar-width: 260px;
+  --font: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  font-family: var(--font);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout Shell ── */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  background: var(--light-gray);
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.sidebarLogo {
+  padding: 0 20px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebarLogoImg {
+  height: 22px;
+  width: auto;
+}
+
+.sidebarLogoTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.sidebarLogoSub {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 400;
+  margin-top: 2px;
+  padding: 0 20px;
+}
+
+.sidebarDivider {
+  height: 1px;
+  background: var(--border);
+  margin: 16px 20px;
+}
+
+.sidebarSectionLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  padding: 0 20px;
+  margin-bottom: 6px;
+}
+
+.sidebarProduct {
+  margin-bottom: 4px;
+}
+
+.sidebarProductHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 20px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+  user-select: none;
+}
+
+.sidebarProductHeader:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.sidebarProductEmoji {
+  font-size: 1rem;
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.sidebarProductName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sidebarToggle {
+  margin-left: auto;
+  font-size: 0.625rem;
+  color: var(--muted);
+  transition: transform 0.15s ease;
+}
+
+.sidebarToggleOpen {
+  transform: rotate(90deg);
+}
+
+.sidebarCategories {
+  padding: 2px 0 8px;
+}
+
+.sidebarCategoryLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 20px 5px 50px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.1s ease, color 0.1s ease;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+.sidebarCategoryLink:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text);
+}
+
+.sidebarCategoryLinkActive {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.sidebarCategoryEmoji {
+  font-size: 0.8125rem;
+  width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ── Mobile Header ── */
+.mobileHeader {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobileHeaderLogo {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.hamburgerBtn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.sidebarOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 99;
+}
+
+.sidebarOverlayOpen {
+  display: block;
+}
+
+.sidebarMobileOpen {
+  transform: translateX(0) !important;
+}
+
+/* ── Main Content ── */
+.main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainInner {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 48px;
+  flex: 1;
+}
+
+/* ── Breadcrumb ── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.breadcrumbLink {
+  color: var(--muted);
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  transition: color 0.1s ease;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.breadcrumbLink:hover {
+  color: var(--text);
+}
+
+.breadcrumbSep {
+  color: var(--border);
+  font-size: 0.6875rem;
+  padding: 0 3px;
+}
+
+.breadcrumbCurrent {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ── Search ── */
+.searchBar {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.searchBarIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.searchInput::placeholder {
+  color: #c4c4c1;
+}
+
+.searchInput:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+/* ── Page Title ── */
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.pageSubtitle {
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+/* ── Product Block ── */
+.contentProduct {
+  margin-bottom: 52px;
+}
+
+.contentProductHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.contentProductEmoji {
+  font-size: 1.25rem;
+}
+
+.contentProductTitle {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.contentProductDesc {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-bottom: 24px;
+  padding-left: 34px;
+}
+
+/* ── Category ── */
+.contentCategory {
+  margin-bottom: 28px;
+}
+
+.contentCategoryHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.contentCategoryEmoji {
+  font-size: 0.9375rem;
+}
+
+.contentCategoryTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.contentCategoryDesc {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin-left: auto;
+}
+
+/* ── Subcategory ── */
+.contentSubcategory {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.contentSubcategoryLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 6px 0 4px 12px;
+}
+
+/* ── FAQ Items ── */
+.faqList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--border);
+}
+
+.faqItemHeader {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+  gap: 10px;
+  user-select: none;
+}
+
+.faqItemHeader:hover {
+  background: var(--light-gray);
+}
+
+.faqItemHeader:hover .faqItemQuestion {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--muted);
+}
+
+.faqItemToggle {
+  font-size: 0.75rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: background 0.1s ease, transform 0.15s ease;
+}
+
+.faqItemToggleOpen {
+  transform: rotate(90deg);
+}
+
+.faqItemHeader:hover .faqItemToggle {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.faqItemQuestion {
+  font-size: 0.9375rem;
+  color: var(--text);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.faqItemAnswer {
+  padding: 0 12px 14px 40px;
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ── Search Results ── */
+.searchResultsHeading {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.searchResultItem {
+  border-bottom: 1px solid var(--border);
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.searchResultItem:hover {
+  background: var(--light-gray);
+}
+
+.searchResultMeta {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+
+.searchResultQuestion {
+  font-size: 0.9375rem;
+  color: var(--text);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.searchResultAnswer {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.noResults {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  padding: 32px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.footerAccent {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.catIcon {
+  flex-shrink: 0;
+}
+
+/* ── Section Label ── */
+.sectionLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+
+/* ── Subcategory List ── */
+.subcategoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 24px;
+}
+
+.subcategoryItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  color: var(--text);
+  width: 100%;
+  text-align: left;
+  transition: background 0.1s ease;
+}
+
+.subcategoryItem:hover {
+  background: var(--light-gray);
+}
+
+.subcategoryLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.subcategoryRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.subcategoryCount {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.folderIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.catArrow {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* ── Responsive: Mobile ── */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 300;
+  }
+
+  .mobileHeader {
+    display: flex;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .mainInner {
+    padding: 24px 20px;
+  }
+
+  .pageTitle {
+    font-size: 1.5rem;
+  }
+
+  .contentProductDesc {
+    padding-left: 0;
+  }
+
+  .contentCategoryDesc {
+    display: none;
+  }
+
+  .breadcrumb {
+    margin-bottom: 20px;
+  }
+}
+
+/* Markdown content styles */
+.markdownContent h1, .markdownContent h2, .markdownContent h3 { font-weight: 600; margin-top: 1em; margin-bottom: 0.5em; }
+.markdownContent p { margin-bottom: 0.75em; }
+.markdownContent p:last-child { margin-bottom: 0; }
+.markdownContent ul, .markdownContent ol { padding-left: 1.5em; margin-bottom: 0.75em; }
+.markdownContent li { margin-bottom: 0.25em; }
+.markdownContent code { background: rgba(0,0,0,0.06); padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; }
+.markdownContent pre { background: rgba(0,0,0,0.06); padding: 1em; border-radius: 8px; overflow-x: auto; margin-bottom: 0.75em; }
+.markdownContent pre code { background: none; padding: 0; }
+.markdownContent a { color: #2563eb; text-decoration: underline; }
+.markdownContent blockquote { border-left: 3px solid rgba(0,0,0,0.15); padding-left: 1em; margin-left: 0; opacity: 0.8; }
+.markdownContent table { width: 100%; border-collapse: collapse; margin-bottom: 0.75em; }
+.markdownContent th, .markdownContent td { border: 1px solid rgba(0,0,0,0.1); padding: 0.5em 0.75em; text-align: left; }
+

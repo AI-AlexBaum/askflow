@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AskFlow Help Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #18181b;
+      background: #fafafa;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    a:hover {
+      color: #5e6ad2;
+    }
+
+    /* Header */
+    .header {
+      background: #fff;
+      border-bottom: 1px solid #e4e4e7;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #18181b;
+    }
+
+    .header-divider {
+      width: 1px;
+      height: 20px;
+      background: #e4e4e7;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .breadcrumb-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      background: #f4f4f5;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #71717a;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .breadcrumb-pill:hover {
+      background: #e4e4e7;
+      color: #18181b;
+    }
+
+    .breadcrumb-pill.active {
+      background: #5e6ad2;
+      color: #fff;
+    }
+
+    .breadcrumb-sep {
+      font-size: 11px;
+      color: #d4d4d8;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-nav a {
+      font-size: 13px;
+      font-weight: 500;
+      color: #71717a;
+      transition: color 0.15s ease;
+    }
+
+    .header-nav a:hover {
+      color: #18181b;
+    }
+
+    /* Main container */
+    .main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+
+    /* Search */
+    .search-section {
+      margin-bottom: 40px;
+    }
+
+    .search-section h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+
+    .search-wrapper {
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 14px 10px 40px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      background: #fff;
+      border: 1px solid #e4e4e7;
+      border-radius: 8px;
+      outline: none;
+      color: #18181b;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .search-input::placeholder {
+      color: #a1a1aa;
+    }
+
+    .search-input:focus {
+      border-color: #5e6ad2;
+      box-shadow: 0 0 0 3px rgba(94, 106, 210, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: #a1a1aa;
+    }
+
+    .search-hint {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 6px;
+      background: #f4f4f5;
+      border: 1px solid #e4e4e7;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #a1a1aa;
+      pointer-events: none;
+    }
+
+    /* Products */
+    .products-section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #a1a1aa;
+      margin-bottom: 12px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid #e4e4e7;
+      border-radius: 8px;
+      padding: 16px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      border-color: #d4d4d8;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .product-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+    }
+
+    .product-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      background: #f4f4f5;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #71717a;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      color: #71717a;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .product-categories {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .category-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 0;
+      border-top: 1px solid #f4f4f5;
+      font-size: 13px;
+      font-weight: 500;
+      color: #3f3f46;
+      transition: color 0.15s ease;
+    }
+
+    .category-row:hover {
+      color: #5e6ad2;
+    }
+
+    .category-row .cat-icon {
+      width: 14px;
+      height: 14px;
+      color: #a1a1aa;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    .category-row-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .category-count {
+      font-size: 11px;
+      font-weight: 500;
+      color: #a1a1aa;
+      background: #f4f4f5;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin-bottom: 40px;
+    }
+
+    .faq-list {
+      background: #fff;
+      border: 1px solid #e4e4e7;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #f4f4f5;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #18181b;
+      transition: background 0.15s ease;
+    }
+
+    .faq-question:hover {
+      background: #fafafa;
+    }
+
+    .faq-question-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .faq-product-label {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      flex-shrink: 0;
+      background: #eef0fc;
+      color: #5e6ad2;
+    }
+
+    .faq-question-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .faq-chevron {
+      width: 16px;
+      height: 16px;
+      color: #d4d4d8;
+      flex-shrink: 0;
+      transition: transform 0.2s ease, color 0.15s ease;
+    }
+
+    .faq-item.active .faq-chevron {
+      transform: rotate(180deg);
+      color: #5e6ad2;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 160px;
+    }
+
+    .faq-answer-inner {
+      padding: 0 16px 12px 16px;
+      font-size: 13px;
+      color: #71717a;
+      line-height: 1.6;
+      margin-left: 0;
+    }
+
+    /* Footer */
+    .footer {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 24px;
+      border-top: 1px solid #e4e4e7;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-left {
+      font-size: 12px;
+      color: #a1a1aa;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 500;
+      color: #a1a1aa;
+      transition: color 0.15s ease;
+    }
+
+    .footer-links a:hover {
+      color: #18181b;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-nav {
+        display: none;
+      }
+
+      .search-hint {
+        display: none;
+      }
+
+      .breadcrumbs {
+        display: none;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .header-inner {
+        padding: 0 16px;
+        height: 48px;
+      }
+
+      .main {
+        padding: 20px 16px 48px;
+      }
+
+      .search-section h1 {
+        font-size: 18px;
+        margin-bottom: 12px;
+      }
+
+      .search-input {
+        padding: 9px 12px 9px 36px;
+        font-size: 13px;
+      }
+
+      .search-icon {
+        width: 14px;
+        height: 14px;
+        left: 10px;
+      }
+
+      .product-card {
+        padding: 12px;
+      }
+
+      .faq-question {
+        padding: 9px 12px;
+        font-size: 12px;
+      }
+
+      .faq-product-label {
+        font-size: 10px;
+        padding: 1px 5px;
+      }
+
+      .faq-answer-inner {
+        padding: 0 12px 10px;
+        font-size: 12px;
+      }
+
+      .footer {
+        padding: 20px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="#" class="header-logo">AskFlow</a>
+        <div class="header-divider"></div>
+        <nav class="breadcrumbs">
+          <a href="#" class="breadcrumb-pill">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <a href="#" class="breadcrumb-pill active">Help Center</a>
+        </nav>
+      </div>
+      <nav class="header-nav">
+        <a href="#">Products</a>
+        <a href="#">Docs</a>
+        <a href="#">API</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Search -->
+    <section class="search-section">
+      <h1>Help Center</h1>
+      <div class="search-wrapper">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="M21 21l-4.35-4.35"></path>
+        </svg>
+        <input type="text" class="search-input" placeholder="Search articles...">
+        <span class="search-hint">&#8984;K</span>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products-section">
+      <div class="section-title">Products</div>
+      <div class="products-grid">
+
+        <!-- 2drive -->
+        <div class="product-card">
+          <div class="product-header">
+            <span class="product-name">2drive</span>
+            <span class="product-badge">5 articles</span>
+          </div>
+          <p class="product-desc">The complete package for driving instructors and driving schools</p>
+          <div class="product-categories">
+            <a href="#" class="category-row">
+              <span class="category-row-left">
+                <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                Planning &amp; Agenda
+              </span>
+              <span class="category-count">3</span>
+            </a>
+            <a href="#" class="category-row">
+              <span class="category-row-left">
+                <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                  <line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+                Billing
+              </span>
+              <span class="category-count">1</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 2quote -->
+        <div class="product-card">
+          <div class="product-header">
+            <span class="product-name">2quote</span>
+            <span class="product-badge">2 articles</span>
+          </div>
+          <p class="product-desc">The smart solution for quotes and order management</p>
+          <div class="product-categories">
+            <a href="#" class="category-row">
+              <span class="category-row-left">
+                <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                Quotes
+              </span>
+              <span class="category-count">1</span>
+            </a>
+            <a href="#" class="category-row">
+              <span class="category-row-left">
+                <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                Customer Management
+              </span>
+              <span class="category-count">1</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="section-title">Frequently asked questions</div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-left">
+              <span class="faq-product-label">2drive</span>
+              <span class="faq-question-text">How do I add a new driving lesson?</span>
+            </span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Click on the desired time slot in the agenda. Choose the student and instructor. Save the appointment to confirm.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-left">
+              <span class="faq-product-label">2drive</span>
+              <span class="faq-question-text">Can I automatically repeat lessons?</span>
+            </span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Yes, when creating a lesson you can choose the 'Repeat' option. Here you can set the frequency and end date.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-left">
+              <span class="faq-product-label">2drive</span>
+              <span class="faq-question-text">How do I link an instructor to a vehicle?</span>
+            </span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Go to Settings > Instructors. Select the instructor and choose the default vehicle from the dropdown menu.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-left">
+              <span class="faq-product-label">2drive</span>
+              <span class="faq-question-text">How do I send an invoice to a student?</span>
+            </span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Go to the student profile, Invoices tab. Click 'New Invoice' and select the outstanding lessons or packages.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-left">
+              <span class="faq-product-label">2quote</span>
+              <span class="faq-question-text">How do I create a new quote?</span>
+            </span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Click the 'New Quote' button in the dashboard. Fill in the customer details and product lines and click send.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-left">
+              <span class="faq-product-label">2quote</span>
+              <span class="faq-question-text">Can I import customers from Excel?</span>
+            </span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Yes, go to Customers > Import. Upload your .csv or .xlsx file and map the columns to the correct fields.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-left">&copy; 2026 AskFlow &middot; Your knowledge, instantly accessible</div>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Status</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleFaq(btn) {
+      var item = btn.parentElement;
+      var wasActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      if (!wasActive) {
+        item.classList.add('active');
+      }
+    }
+  </script>
+
+</body>
+</html>

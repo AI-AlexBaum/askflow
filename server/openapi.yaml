@@ -1,0 +1,740 @@
+openapi: 3.0.3
+info:
+  title: AskFlow API
+  description: |
+    RESTful API for the AskFlow FAQ & Knowledge Base platform.
+
+    ## Authentication
+    Use an API key via the `X-API-Key` header to authenticate requests.
+    Create API keys in the AskFlow admin panel under Settings > API Keys.
+
+    ## AI & Chatbot Integration
+    AskFlow is designed to integrate with chatbots and AI assistants:
+
+    - **`POST /ask`** — Send a question, get the best matching answers (ideal for chatbots)
+    - **`GET /context`** — Get all FAQ data for RAG/knowledge base population
+    - **`GET /search`** — Full-text search with relevance ranking
+
+    ### Supported Platforms
+    - **Custom chatbots** — Use the /ask endpoint directly
+    - **Botpress / Dialogflow / Rasa** — Use /ask as a webhook or custom action
+    - **LangChain / LlamaIndex** — Use /context to populate vector stores
+    - **Claude / ChatGPT tools** — Use /ask as a tool/function call
+
+    ### Quick Start
+    ```bash
+    # 1. Get your API key from the admin panel
+    # 2. Ask a question
+    curl -X POST https://your-domain.com/api/v1/ask \
+      -H "X-API-Key: faq_your-api-key" \
+      -H "Content-Type: application/json" \
+      -d '{"question": "How do I get started?"}'
+    ```
+  version: 1.0.0
+  contact:
+    name: AskFlow
+servers:
+  - url: /api/v1
+    description: API v1
+
+security:
+  - ApiKeyAuth: []
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+        subcategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FAQItem'
+    FAQItem:
+      type: object
+      properties:
+        id:
+          type: string
+        question:
+          type: string
+        answer:
+          type: string
+    FlatCategory:
+      type: object
+      properties:
+        id:
+          type: string
+        product_id:
+          type: string
+        parent_id:
+          type: string
+          nullable: true
+        title:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+        sort_order:
+          type: integer
+    SearchResult:
+      type: object
+      properties:
+        id:
+          type: string
+        category_id:
+          type: string
+        question:
+          type: string
+        answer:
+          type: string
+        category_title:
+          type: string
+        product_id:
+          type: string
+        product_name:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+
+paths:
+  /products:
+    get:
+      summary: List all products with nested categories and FAQ items
+      operationId: getProducts
+      responses:
+        '200':
+          description: List of products with full category tree
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '401':
+          description: API key missing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a product
+      operationId: createProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                  default: ''
+      responses:
+        '201':
+          description: Created product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+
+  /products/{id}:
+    get:
+      summary: Get a single product with nested categories
+      operationId: getProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product with full category tree
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a product
+      operationId: updateProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Updated product
+    delete:
+      summary: Delete a product
+      operationId: deleteProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deleted
+        '404':
+          description: Product not found
+
+  /categories:
+    get:
+      summary: List all categories (flat)
+      operationId: getCategories
+      responses:
+        '200':
+          description: Flat list of all categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlatCategory'
+    post:
+      summary: Create a category (use parent_id for nesting)
+      description: |
+        Create a category within a product. Use `parent_id` to nest categories
+        at any depth (sub-sub-sub-subcategories are supported).
+      operationId: createCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [product_id, title]
+              properties:
+                product_id:
+                  type: string
+                  description: ID of the product this category belongs to
+                parent_id:
+                  type: string
+                  nullable: true
+                  description: ID of parent category (null for root categories)
+                title:
+                  type: string
+                description:
+                  type: string
+                  default: ''
+                icon:
+                  type: string
+                  default: ''
+      responses:
+        '201':
+          description: Created category
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlatCategory'
+
+  /categories/{id}:
+    put:
+      summary: Update a category
+      operationId: updateCategory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                icon:
+                  type: string
+                parent_id:
+                  type: string
+                  nullable: true
+      responses:
+        '200':
+          description: Updated category
+    delete:
+      summary: Delete a category (cascades to children)
+      operationId: deleteCategory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deleted
+        '404':
+          description: Category not found
+
+  /faq-items:
+    get:
+      summary: List FAQ items
+      operationId: getFaqItems
+      parameters:
+        - name: category_id
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filter by category ID
+      responses:
+        '200':
+          description: List of FAQ items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FAQItem'
+    post:
+      summary: Create a FAQ item
+      operationId: createFaqItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [category_id, question, answer]
+              properties:
+                category_id:
+                  type: string
+                  description: ID of the category this FAQ belongs to
+                question:
+                  type: string
+                answer:
+                  type: string
+                  description: Answer (supports Markdown)
+      responses:
+        '201':
+          description: Created FAQ item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FAQItem'
+
+  /faq-items/{id}:
+    get:
+      summary: Get a single FAQ item
+      operationId: getFaqItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: FAQ item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FAQItem'
+        '404':
+          description: FAQ item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a FAQ item
+      operationId: updateFaqItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                answer:
+                  type: string
+                category_id:
+                  type: string
+      responses:
+        '200':
+          description: Updated FAQ item
+    delete:
+      summary: Delete a FAQ item
+      operationId: deleteFaqItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deleted
+        '404':
+          description: FAQ item not found
+
+  /bulk-import:
+    post:
+      summary: Bulk import products with nested categories and FAQ items
+      description: |
+        Import a complete tree structure in one API call. Supports unlimited
+        nesting depth (sub-sub-sub-subcategories).
+
+        **Modes:**
+        - `merge` (default) — Add to existing data
+        - `replace` — Delete all existing data first
+
+        **Example:**
+        ```json
+        {
+          "mode": "merge",
+          "data": {
+            "products": [{
+              "name": "My Product",
+              "categories": [{
+                "title": "Getting Started",
+                "subcategories": [{
+                  "title": "Installation",
+                  "subcategories": [{
+                    "title": "Linux",
+                    "items": [
+                      {"question": "How to install?", "answer": "Run apt install..."}
+                    ]
+                  }]
+                }],
+                "items": [
+                  {"question": "What is this?", "answer": "A FAQ platform."}
+                ]
+              }]
+            }]
+          }
+        }
+        ```
+      operationId: bulkImport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [data]
+              properties:
+                mode:
+                  type: string
+                  enum: [merge, replace]
+                  default: merge
+                data:
+                  type: object
+                  required: [products]
+                  properties:
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        required: [name]
+                        properties:
+                          name:
+                            type: string
+                          description:
+                            type: string
+                          categories:
+                            type: array
+                            description: Recursive tree of categories (unlimited depth)
+                            items:
+                              type: object
+                              required: [title]
+                              properties:
+                                title:
+                                  type: string
+                                description:
+                                  type: string
+                                icon:
+                                  type: string
+                                subcategories:
+                                  type: array
+                                  items:
+                                    type: object
+                                items:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required: [question, answer]
+                                    properties:
+                                      question:
+                                        type: string
+                                      answer:
+                                        type: string
+      responses:
+        '201':
+          description: Import successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  created:
+                    type: object
+                    properties:
+                      products:
+                        type: integer
+                      categories:
+                        type: integer
+                      faq_items:
+                        type: integer
+        '400':
+          description: Invalid data format
+        '500':
+          description: Import failed
+
+  /search:
+    get:
+      summary: Search FAQ items
+      operationId: searchFaq
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Search query string
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchResult'
+
+  /ask:
+    post:
+      summary: Ask a question (chatbot-friendly)
+      description: |
+        Send a natural language question and get the best matching FAQ answers.
+        Ideal for chatbot integrations, AI assistants, and custom search UIs.
+
+        **Chatbot Integration:**
+        - Use `format=text` query param for plain text answers (no Markdown)
+        - Each answer includes `answer_plain` field with stripped Markdown
+        - Filter by `product_id` to scope answers to a specific product
+
+        **Example (curl):**
+        ```bash
+        curl -X POST /api/v1/ask \
+          -H "X-API-Key: your-key" \
+          -H "Content-Type: application/json" \
+          -d '{"question": "How do I reset my password?"}'
+        ```
+
+        **Example (Python):**
+        ```python
+        import requests
+        response = requests.post(
+            "https://your-domain.com/api/v1/ask",
+            headers={"X-API-Key": "your-key"},
+            json={"question": "How do I reset my password?"}
+        )
+        answer = response.json()["answers"][0]["answer_plain"]
+        ```
+      operationId: askQuestion
+      parameters:
+        - name: format
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [text, markdown]
+          description: Response format - 'text' strips Markdown from answers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [question]
+              properties:
+                question:
+                  type: string
+                  description: The question to search for
+                product_id:
+                  type: string
+                  description: Optional - limit search to a specific product
+                limit:
+                  type: integer
+                  default: 5
+                  maximum: 20
+                  description: Maximum number of answers to return
+      responses:
+        '200':
+          description: Matching FAQ answers ranked by relevance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  question:
+                    type: string
+                  total_results:
+                    type: integer
+                  answers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        question:
+                          type: string
+                        answer:
+                          type: string
+                          description: Answer in original format (Markdown or plain text)
+                        answer_plain:
+                          type: string
+                          description: Answer with Markdown stripped (always plain text)
+                        category:
+                          type: string
+                        product:
+                          type: string
+                        product_id:
+                          type: string
+                        category_id:
+                          type: string
+
+  /context:
+    get:
+      summary: Get all FAQ data for RAG/AI context
+      description: |
+        Returns all published FAQ items in a flat, AI-friendly format.
+        Use this to build a knowledge base for your chatbot or AI assistant.
+
+        **Use cases:**
+        - Populate a RAG (Retrieval Augmented Generation) knowledge base
+        - Sync FAQ data to your chatbot platform
+        - Build custom search indexes
+        - Feed into AI assistant training data
+
+        **Example (Python RAG):**
+        ```python
+        import requests
+        data = requests.get(
+            "https://your-domain.com/api/v1/context",
+            headers={"X-API-Key": "your-key"}
+        ).json()
+
+        for faq in data["faqs"]:
+            # Add to your vector database
+            embed_and_store(faq["question"], faq["answer_plain"])
+        ```
+      operationId: getContext
+      parameters:
+        - name: product_id
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Optional - limit to a specific product
+      responses:
+        '200':
+          description: All FAQ data in flat format
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  updated_at:
+                    type: string
+                    format: date-time
+                  faqs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        question:
+                          type: string
+                        answer:
+                          type: string
+                        answer_plain:
+                          type: string
+                        category:
+                          type: string
+                        category_id:
+                          type: string
+                        product:
+                          type: string
+                        product_id:
+                          type: string

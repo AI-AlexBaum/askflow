@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskFlow Help Center — Vercel Dark</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #000000;
+            --text: #ededed;
+            --accent: #ffffff;
+            --muted: #888888;
+            --border: rgba(255, 255, 255, 0.1);
+            --border-hover: rgba(255, 255, 255, 0.25);
+            --glow: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --font-sans: 'Geist Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Mono', 'Courier New', monospace;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ── Navigation ── */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            height: 56px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span {
+            color: var(--muted);
+            font-weight: 400;
+            margin-left: 8px;
+            font-size: 0.8125rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 400;
+            transition: color 0.15s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            text-align: center;
+            padding: 100px 40px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--muted);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            padding: 4px 14px;
+            margin-bottom: 28px;
+            letter-spacing: 0.02em;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            color: var(--accent);
+            background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1.125rem;
+            font-weight: 300;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ── Search ── */
+        .search-container {
+            max-width: 600px;
+            margin: 40px auto 0;
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: 0.875rem;
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 18px 14px 46px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .search-input::placeholder {
+            color: #555555;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+        }
+
+        .search-hint {
+            text-align: center;
+            margin-top: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: #444444;
+        }
+
+        .search-hint kbd {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1px 6px;
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            margin: 0 2px;
+        }
+
+        /* ── Products Grid ── */
+        .products-section {
+            max-width: 960px;
+            margin: 80px auto 0;
+            padding: 0 40px;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .product-card {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 32px;
+            background: var(--card-bg);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.04), 0 0 0 1px rgba(255, 255, 255, 0.08);
+        }
+
+        .product-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .product-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+        }
+
+        .product-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+        }
+
+        .product-desc {
+            color: var(--muted);
+            font-size: 0.8125rem;
+            margin-bottom: 24px;
+            font-weight: 300;
+        }
+
+        .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-top: 1px solid var(--border);
+            cursor: pointer;
+            transition: padding-left 0.15s ease;
+        }
+
+        .category-item:hover {
+            padding-left: 6px;
+        }
+
+        .category-item-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-icon {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--muted);
+            width: 20px;
+            text-align: center;
+        }
+
+        .category-name {
+            font-size: 0.875rem;
+            color: var(--text);
+            font-weight: 400;
+        }
+
+        .category-arrow {
+            color: var(--muted);
+            font-size: 0.75rem;
+            transition: transform 0.15s ease;
+        }
+
+        .category-item:hover .category-arrow {
+            transform: translateX(3px);
+            color: var(--text);
+        }
+
+        .category-meta {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: #444444;
+            margin-left: auto;
+            margin-right: 12px;
+        }
+
+        /* ── FAQ Section ── */
+        .faq-section {
+            max-width: 960px;
+            margin: 80px auto 0;
+            padding: 0 40px;
+        }
+
+        .faq-product-block {
+            margin-bottom: 60px;
+        }
+
+        .faq-product-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: -0.03em;
+            margin-bottom: 4px;
+        }
+
+        .faq-product-subtitle {
+            font-size: 0.8125rem;
+            color: var(--muted);
+            font-weight: 300;
+            margin-bottom: 32px;
+        }
+
+        .faq-category-title {
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 0;
+            margin-top: 32px;
+        }
+
+        .faq-subcategory {
+            margin-top: 16px;
+            margin-bottom: 0;
+        }
+
+        .faq-subcategory-label {
+            font-size: 0.6875rem;
+            font-family: var(--font-mono);
+            color: #444444;
+            padding-left: 4px;
+            margin-bottom: 4px;
+        }
+
+        .faq-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+            margin: 0 -12px;
+            padding-left: 12px;
+            padding-right: 12px;
+            border-radius: 6px;
+        }
+
+        .faq-number {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: #444444;
+            min-width: 28px;
+            padding-top: 2px;
+        }
+
+        .faq-content {
+            flex: 1;
+        }
+
+        .faq-question {
+            font-size: 0.9375rem;
+            color: var(--text);
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .faq-answer {
+            margin-top: 8px;
+            font-size: 0.8125rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        .faq-item.open .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-toggle {
+            color: var(--muted);
+            font-size: 1rem;
+            font-weight: 300;
+            transition: transform 0.2s ease, color 0.15s ease;
+            flex-shrink: 0;
+            padding-top: 1px;
+        }
+
+        .faq-item:hover .faq-toggle {
+            color: var(--text);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            max-width: 960px;
+            margin: 100px auto 0;
+            padding: 40px 40px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-left {
+            font-size: 0.75rem;
+            color: #444444;
+            font-family: var(--font-mono);
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-right a {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .footer-right a:hover {
+            color: var(--text);
+        }
+
+        /* ── Responsive: 390px ── */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-hamburger {
+                display: block;
+            }
+
+            .hero {
+                padding: 64px 20px 40px;
+            }
+
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .search-container {
+                margin: 28px 20px 0;
+            }
+
+            .products-section {
+                padding: 0 20px;
+                margin-top: 56px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .product-card {
+                padding: 24px;
+            }
+
+            .faq-section {
+                padding: 0 20px;
+                margin-top: 56px;
+            }
+
+            .faq-product-title {
+                font-size: 1.25rem;
+            }
+
+            .footer {
+                padding: 32px 20px;
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">AskFlow <span>/ Help Center</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Docs</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <button class="nav-hamburger" aria-label="Menu">&#9776;</button>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">v2.0 &mdash; knowledge base</div>
+        <h1>How can we help?</h1>
+        <p>Your knowledge, instantly accessible</p>
+
+        <!-- Search -->
+        <div class="search-container">
+            <span class="search-icon">&#9906;</span>
+            <input type="text" class="search-input" placeholder="Search articles, questions, topics...">
+            <div class="search-hint">Press <kbd>/</kbd> to focus &middot; <kbd>Esc</kbd> to clear</div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products-section">
+        <div class="section-label">// Products</div>
+        <div class="products-grid">
+
+            <!-- 2drive -->
+            <div class="product-card">
+                <div class="product-card-header">
+                    <div class="product-icon">&#9673;</div>
+                    <div class="product-name">2drive</div>
+                </div>
+                <div class="product-desc">The complete package for driving instructors and driving schools</div>
+                <div class="category-list">
+                    <div class="category-item">
+                        <div class="category-item-left">
+                            <span class="category-icon">&#9636;</span>
+                            <span class="category-name">Planning &amp; Agenda</span>
+                        </div>
+                        <span class="category-meta">3 articles</span>
+                        <span class="category-arrow">&rarr;</span>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-item-left">
+                            <span class="category-icon">&#9645;</span>
+                            <span class="category-name">Billing</span>
+                        </div>
+                        <span class="category-meta">1 article</span>
+                        <span class="category-arrow">&rarr;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2quote -->
+            <div class="product-card">
+                <div class="product-card-header">
+                    <div class="product-icon">&#9671;</div>
+                    <div class="product-name">2quote</div>
+                </div>
+                <div class="product-desc">The smart solution for quotes and order management</div>
+                <div class="category-list">
+                    <div class="category-item">
+                        <div class="category-item-left">
+                            <span class="category-icon">&#9634;</span>
+                            <span class="category-name">Quotes</span>
+                        </div>
+                        <span class="category-meta">1 article</span>
+                        <span class="category-arrow">&rarr;</span>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-item-left">
+                            <span class="category-icon">&#9640;</span>
+                            <span class="category-name">Customer Management</span>
+                        </div>
+                        <span class="category-meta">1 article</span>
+                        <span class="category-arrow">&rarr;</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-label">// Frequently Asked Questions</div>
+
+        <!-- 2drive FAQs -->
+        <div class="faq-product-block">
+            <div class="faq-product-title">2drive</div>
+            <div class="faq-product-subtitle">The complete package for driving instructors and driving schools</div>
+
+            <div class="faq-category-title">Planning &amp; Agenda &mdash; Manage your lessons and instructors</div>
+
+            <div class="faq-subcategory">
+                <div class="faq-subcategory-label">// Agenda Management</div>
+                <div class="faq-item" onclick="this.classList.toggle('open')">
+                    <span class="faq-number">01</span>
+                    <div class="faq-content">
+                        <div class="faq-question">How do I add a new driving lesson?</div>
+                        <div class="faq-answer">Click on the desired time slot in the agenda. Choose the student and instructor. Save the appointment to confirm.</div>
+                    </div>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('open')">
+                    <span class="faq-number">02</span>
+                    <div class="faq-content">
+                        <div class="faq-question">Can I automatically repeat lessons?</div>
+                        <div class="faq-answer">Yes, when creating a lesson you can choose the 'Repeat' option. Here you can set the frequency and end date.</div>
+                    </div>
+                    <span class="faq-toggle">+</span>
+                </div>
+            </div>
+
+            <div class="faq-subcategory">
+                <div class="faq-subcategory-label">// Instructors</div>
+                <div class="faq-item" onclick="this.classList.toggle('open')">
+                    <span class="faq-number">03</span>
+                    <div class="faq-content">
+                        <div class="faq-question">How do I link an instructor to a vehicle?</div>
+                        <div class="faq-answer">Go to Settings > Instructors. Select the instructor and choose the default vehicle from the dropdown menu.</div>
+                    </div>
+                    <span class="faq-toggle">+</span>
+                </div>
+            </div>
+
+            <div class="faq-category-title">Billing &mdash; Invoices, packages and payments</div>
+
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <span class="faq-number">04</span>
+                <div class="faq-content">
+                    <div class="faq-question">How do I send an invoice to a student?</div>
+                    <div class="faq-answer">Go to the student profile, Invoices tab. Click 'New Invoice' and select the outstanding lessons or packages.</div>
+                </div>
+                <span class="faq-toggle">+</span>
+            </div>
+        </div>
+
+        <!-- 2quote FAQs -->
+        <div class="faq-product-block">
+            <div class="faq-product-title">2quote</div>
+            <div class="faq-product-subtitle">The smart solution for quotes and order management</div>
+
+            <div class="faq-category-title">Quotes &mdash; Create and manage quotes</div>
+
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <span class="faq-number">05</span>
+                <div class="faq-content">
+                    <div class="faq-question">How do I create a new quote?</div>
+                    <div class="faq-answer">Click the 'New Quote' button in the dashboard. Fill in the customer details and product lines and click send.</div>
+                </div>
+                <span class="faq-toggle">+</span>
+            </div>
+
+            <div class="faq-category-title">Customer Management &mdash; CRM and customer contact</div>
+
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <span class="faq-number">06</span>
+                <div class="faq-content">
+                    <div class="faq-question">Can I import customers from Excel?</div>
+                    <div class="faq-answer">Yes, go to Customers > Import. Upload your .csv or .xlsx file and map the columns to the correct fields.</div>
+                </div>
+                <span class="faq-toggle">+</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">&copy; 2026 AskFlow &mdash; All rights reserved.</div>
+        <div class="footer-right">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Status</a>
+        </div>
+    </footer>
+
+</body>
+</html>

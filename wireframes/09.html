@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskFlow Help Center — Glassmorphism Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            color: #111827;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #f0f4ff 100%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Decorative gradient orbs */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body::before {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #c7d2fe, transparent 70%);
+            top: -100px;
+            right: -100px;
+        }
+
+        body::after {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #e9d5ff, transparent 70%);
+            bottom: 100px;
+            left: -150px;
+        }
+
+        /* Glass utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Header ── */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 20px;
+            color: #111827;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: #fff;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4b5563;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #4f46e5;
+        }
+
+        .nav-cta {
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            color: #fff !important;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            padding: 8px 18px;
+            border-radius: 10px;
+            transition: opacity 0.2s;
+        }
+
+        .nav-cta:hover {
+            opacity: 0.9;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            text-align: center;
+            padding: 80px 0 48px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            color: #111827;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #6b7280;
+            max-width: 480px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* ── Search ── */
+        .search-wrapper {
+            max-width: 620px;
+            margin: 0 auto 64px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 24px 18px 56px;
+            font-family: 'Sora', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .search-input:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12), 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: #9ca3af;
+            pointer-events: none;
+        }
+
+        /* ── Products ── */
+        .products-section {
+            margin-bottom: 72px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #111827;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .product-card {
+            border-radius: 20px;
+            padding: 32px;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .product-icon.indigo {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+        }
+
+        .product-icon.purple {
+            background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+        }
+
+        .product-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .product-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .product-card .product-desc {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .category-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .category-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #111827;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 12px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .category-link:hover {
+            background: rgba(255, 255, 255, 0.85);
+            transform: translateX(4px);
+        }
+
+        .cat-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(79, 70, 229, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cat-icon svg {
+            width: 16px;
+            height: 16px;
+            stroke: #4f46e5;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .category-link .cat-text {
+            flex: 1;
+        }
+
+        .category-link .cat-name {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: #111827;
+        }
+
+        .category-link .cat-desc {
+            display: block;
+            font-size: 12px;
+            color: #9ca3af;
+            font-weight: 400;
+            margin-top: 1px;
+        }
+
+        .category-link .arrow {
+            font-size: 16px;
+            color: #9ca3af;
+            transition: color 0.2s, transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .category-link:hover .arrow {
+            color: #4f46e5;
+            transform: translateX(2px);
+        }
+
+        /* ── Popular Questions ── */
+        .popular-section {
+            margin-bottom: 80px;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .faq-card {
+            border-radius: 16px;
+            padding: 28px;
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .faq-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            color: #4f46e5;
+            background: rgba(79, 70, 229, 0.08);
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            letter-spacing: 0.02em;
+        }
+
+        .faq-card h4 {
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.45;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .faq-card p {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.55;
+        }
+
+        /* ── CTA Banner ── */
+        .cta-section {
+            margin-bottom: 80px;
+        }
+
+        .cta-card {
+            border-radius: 24px;
+            padding: 56px;
+            text-align: center;
+        }
+
+        .cta-card h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .cta-card p {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 28px;
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            font-family: 'Sora', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            padding: 14px 32px;
+            border-radius: 14px;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+            box-shadow: 0 4px 16px rgba(79, 70, 229, 0.3);
+        }
+
+        .cta-btn:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-left {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #4f46e5;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 56px 0 36px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .search-input {
+                padding: 16px 20px 16px 48px;
+                font-size: 14px;
+                border-radius: 16px;
+            }
+
+            .search-wrapper {
+                margin-bottom: 48px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card {
+                padding: 24px;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-card {
+                padding: 36px 24px;
+            }
+
+            .cta-card h2 {
+                font-size: 22px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links li:not(:last-child) {
+                display: none;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-inner {
+                height: 56px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 115.12 2.13c-.67.44-1.12 1.2-1.12 2.12v.5"/><circle cx="12" cy="17" r="0.5"/></svg>
+                </div>
+                AskFlow
+            </a>
+            <ul class="nav-links">
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Documentation</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#" class="nav-cta">Contact Support</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>How can we help?</h1>
+            <p>Your knowledge, instantly accessible. Browse our guides or search for answers to your questions.</p>
+
+            <div class="search-wrapper">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                </svg>
+                <input type="text" class="search-input" placeholder="Search for articles, guides, and more...">
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">Choose your product</h2>
+            <div class="products-grid">
+
+                <!-- 2drive -->
+                <div class="product-card glass">
+                    <div class="product-icon indigo">
+                        <svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-2.7-5.4A2 2 0 0013.5 3h-3a2 2 0 00-1.8 1.1L6 9.5l-2.5 1.1C2.7 11 2 11.8 2 12.7V16c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+                    </div>
+                    <h3>2drive</h3>
+                    <p class="product-desc">The complete package for driving instructors and driving schools</p>
+                    <ul class="category-links">
+                        <li>
+                            <a href="#" class="category-link">
+                                <span class="cat-icon">
+                                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                </span>
+                                <span class="cat-text">
+                                    <span class="cat-name">Planning &amp; Agenda</span>
+                                    <span class="cat-desc">Manage your lessons and instructors</span>
+                                </span>
+                                <span class="arrow">&rarr;</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="category-link">
+                                <span class="cat-icon">
+                                    <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                                </span>
+                                <span class="cat-text">
+                                    <span class="cat-name">Billing</span>
+                                    <span class="cat-desc">Invoices, packages and payments</span>
+                                </span>
+                                <span class="arrow">&rarr;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 2quote -->
+                <div class="product-card glass">
+                    <div class="product-icon purple">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    </div>
+                    <h3>2quote</h3>
+                    <p class="product-desc">The smart solution for quotes and order management</p>
+                    <ul class="category-links">
+                        <li>
+                            <a href="#" class="category-link">
+                                <span class="cat-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                </span>
+                                <span class="cat-text">
+                                    <span class="cat-name">Quotes</span>
+                                    <span class="cat-desc">Create and manage quotes</span>
+                                </span>
+                                <span class="arrow">&rarr;</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="category-link">
+                                <span class="cat-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                                </span>
+                                <span class="cat-text">
+                                    <span class="cat-name">Customer Management</span>
+                                    <span class="cat-desc">CRM and customer contact</span>
+                                </span>
+                                <span class="arrow">&rarr;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Questions -->
+    <section class="popular-section">
+        <div class="container">
+            <h2 class="section-title">Popular Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-card glass">
+                    <span class="faq-badge">Planning &amp; Agenda</span>
+                    <h4>How do I add a new driving lesson?</h4>
+                    <p>Click on the desired time slot in the agenda. Choose the student and instructor. Save the appointment to confirm.</p>
+                </div>
+                <div class="faq-card glass">
+                    <span class="faq-badge">Planning &amp; Agenda</span>
+                    <h4>Can I automatically repeat lessons?</h4>
+                    <p>Yes, when creating a lesson you can choose the 'Repeat' option. Here you can set the frequency and end date.</p>
+                </div>
+                <div class="faq-card glass">
+                    <span class="faq-badge">Instructors</span>
+                    <h4>How do I link an instructor to a vehicle?</h4>
+                    <p>Go to Settings &gt; Instructors. Select the instructor and choose the default vehicle from the dropdown menu.</p>
+                </div>
+                <div class="faq-card glass">
+                    <span class="faq-badge">Billing</span>
+                    <h4>How do I send an invoice to a student?</h4>
+                    <p>Go to the student profile, Invoices tab. Click 'New Invoice' and select the outstanding lessons or packages.</p>
+                </div>
+                <div class="faq-card glass">
+                    <span class="faq-badge">Quotes</span>
+                    <h4>How do I create a new quote?</h4>
+                    <p>Click the 'New Quote' button in the dashboard. Fill in the customer details and product lines and click send.</p>
+                </div>
+                <div class="faq-card glass">
+                    <span class="faq-badge">Customer Management</span>
+                    <h4>Can I import customers from Excel?</h4>
+                    <p>Yes, go to Customers &gt; Import. Upload your .csv or .xlsx file and map the columns to the correct fields.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-card glass">
+                <h2>Still have questions?</h2>
+                <p>Our support team is ready to help. Get in touch and we will respond as soon as possible.</p>
+                <a href="#" class="cta-btn">Contact Support</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-left">&copy; 2026 AskFlow. All rights reserved.</div>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Status</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

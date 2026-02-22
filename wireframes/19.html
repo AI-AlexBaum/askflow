@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradient Mesh FAQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1E1E2E;
+      background: #FFFFFF;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated mesh gradient background */
+    @keyframes meshMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .mesh-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        -45deg,
+        rgba(139, 92, 246, 0.06),
+        rgba(59, 130, 246, 0.06),
+        rgba(236, 72, 153, 0.06),
+        rgba(139, 92, 246, 0.06)
+      );
+      background-size: 400% 400%;
+      animation: meshMove 15s ease infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Mesh gradient blobs */
+    .mesh-blob-1 {
+      position: fixed;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .mesh-blob-2 {
+      position: fixed;
+      bottom: -20%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: #8B5CF6;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1E1E2E;
+      background: linear-gradient(135deg, #8B5CF6, #3B82F6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    .header-nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: #888;
+      transition: color 0.2s ease;
+    }
+
+    .header-nav a:hover {
+      color: #8B5CF6;
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 24px 64px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #1E1E2E 0%, #8B5CF6 50%, #3B82F6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: #888;
+      font-weight: 400;
+      margin-bottom: 40px;
+    }
+
+    .search-wrapper {
+      max-width: 540px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 16px 24px 16px 52px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      border: 1px solid rgba(139, 92, 246, 0.15);
+      border-radius: 16px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: #1E1E2E;
+    }
+
+    .search-input::placeholder {
+      color: #B0B0C0;
+    }
+
+    .search-input:focus {
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.08), 0 8px 32px rgba(139, 92, 246, 0.08);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: #8B5CF6;
+      opacity: 0.5;
+    }
+
+    /* Products */
+    .products {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .product-card {
+      padding: 32px;
+      border: 1px solid rgba(139, 92, 246, 0.1);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(139, 92, 246, 0.1);
+      border-color: rgba(139, 92, 246, 0.25);
+    }
+
+    .product-name {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .product-name a {
+      background: linear-gradient(135deg, #8B5CF6, #3B82F6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .product-name .arrow {
+      font-size: 16px;
+      color: rgba(139, 92, 246, 0.4);
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .product-card:hover .product-name .arrow {
+      color: #8B5CF6;
+      transform: translateX(4px);
+    }
+
+    .product-desc {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .category-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .category-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-top: 1px solid rgba(139, 92, 246, 0.06);
+      font-size: 14px;
+      font-weight: 500;
+      color: #555;
+      transition: color 0.2s ease;
+    }
+
+    .category-link:last-child {
+      border-bottom: 1px solid rgba(139, 92, 246, 0.06);
+    }
+
+    .category-link:hover {
+      color: #8B5CF6;
+    }
+
+    .category-link .cat-arrow {
+      font-size: 13px;
+      color: rgba(139, 92, 246, 0.3);
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .category-link:hover .cat-arrow {
+      color: #8B5CF6;
+      transform: translateX(3px);
+    }
+
+    /* Divider */
+    .divider {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .divider hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2), transparent);
+    }
+
+    /* Popular Questions */
+    .popular {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .popular h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 32px;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      border: 1px solid rgba(139, 92, 246, 0.08);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(139, 92, 246, 0.15);
+    }
+
+    .faq-item.active {
+      border-color: rgba(139, 92, 246, 0.25);
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.06);
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #1E1E2E;
+      transition: color 0.2s ease;
+    }
+
+    .faq-question:hover {
+      color: #8B5CF6;
+    }
+
+    .faq-question .toggle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(139, 92, 246, 0.4);
+      transition: transform 0.3s ease, color 0.2s ease;
+      flex-shrink: 0;
+      margin-left: 16px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(139, 92, 246, 0.06);
+    }
+
+    .faq-item.active .faq-question .toggle {
+      transform: rotate(45deg);
+      color: #8B5CF6;
+      background: rgba(139, 92, 246, 0.12);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-answer p {
+      padding: 0 24px 18px;
+      font-size: 13px;
+      color: #888;
+      line-height: 1.8;
+    }
+
+    .faq-product-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+      background: linear-gradient(135deg, #8B5CF6, #3B82F6);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* Footer */
+    .footer {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(139, 92, 246, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: #BBB;
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: #BBB;
+      font-style: italic;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero { padding: 48px 24px 40px; }
+      .hero h1 { font-size: 36px; letter-spacing: -1px; }
+      .hero p { font-size: 15px; }
+      .products-grid { grid-template-columns: 1fr; gap: 20px; }
+      .header-nav { gap: 20px; }
+      .header-nav a { font-size: 13px; }
+      .popular h2 { font-size: 24px; }
+      .footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (max-width: 390px) {
+      .header { padding: 20px 16px; }
+      .header-nav { gap: 16px; }
+      .hero { padding: 36px 16px 32px; }
+      .hero h1 { font-size: 28px; letter-spacing: -0.5px; }
+      .hero p { font-size: 14px; margin-bottom: 28px; }
+      .search-input { font-size: 13px; padding: 14px 16px 14px 44px; }
+      .products { padding: 0 16px 56px; }
+      .product-card { padding: 24px; border-radius: 16px; }
+      .popular { padding: 48px 16px 56px; }
+      .popular h2 { font-size: 20px; margin-bottom: 24px; }
+      .faq-question { font-size: 13px; padding: 16px 18px; }
+      .faq-answer p { padding: 0 18px 16px; font-size: 12px; }
+      .faq-item { border-radius: 12px; }
+      .divider { padding: 0 16px; }
+      .footer { padding: 32px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mesh-bg"></div>
+  <div class="mesh-blob-1"></div>
+  <div class="mesh-blob-2"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo">AskFlow</div>
+    <nav class="header-nav">
+      <a href="#">Products</a>
+      <a href="#">Docs</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>How can we help?</h1>
+    <p>Your knowledge, instantly accessible</p>
+    <div class="search-wrapper">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="M21 21l-4.35-4.35"></path>
+      </svg>
+      <input type="text" class="search-input" placeholder="Search for articles...">
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products">
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-name"><a href="#">2drive</a><span class="arrow">&rarr;</span></div>
+        <p class="product-desc">The complete package for driving instructors and driving schools</p>
+        <ul class="category-list">
+          <li><a href="#" class="category-link">Planning &amp; Agenda<span class="cat-arrow">&rarr;</span></a></li>
+          <li><a href="#" class="category-link">Billing<span class="cat-arrow">&rarr;</span></a></li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-name"><a href="#">2quote</a><span class="arrow">&rarr;</span></div>
+        <p class="product-desc">The smart solution for quotes and order management</p>
+        <ul class="category-list">
+          <li><a href="#" class="category-link">Quotes<span class="cat-arrow">&rarr;</span></a></li>
+          <li><a href="#" class="category-link">Customer Management<span class="cat-arrow">&rarr;</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"><hr></div>
+
+  <!-- Popular Questions -->
+  <section class="popular">
+    <h2>Popular questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2drive</span><br>How do I add a new driving lesson?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Click on the desired time slot in the agenda. Choose the student and instructor. Save the appointment to confirm.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2drive</span><br>Can I automatically repeat lessons?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Yes, when creating a lesson you can choose the 'Repeat' option. Here you can set the frequency and end date.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2drive</span><br>How do I link an instructor to a vehicle?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Go to Settings > Instructors. Select the instructor and choose the default vehicle from the dropdown menu.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2quote</span><br>How do I create a new quote?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Click the 'New Quote' button in the dashboard. Fill in the customer details and product lines and click send.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2quote</span><br>Can I import customers from Excel?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Yes, go to Customers > Import. Upload your .csv or .xlsx file and map the columns to the correct fields.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-copy">&copy; 2026 AskFlow</span>
+    <span class="footer-tagline">Your knowledge, instantly accessible</span>
+  </footer>
+
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const wasActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(function(el) { el.classList.remove('active'); });
+      if (!wasActive) item.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

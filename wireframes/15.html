@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soft Pastel – AskFlow Help Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', -apple-system, sans-serif;
+      color: #4A4A4A;
+      background: #FFF5F7;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .header-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #F9A8D4;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-logo .dot {
+      width: 10px;
+      height: 10px;
+      background: linear-gradient(135deg, #F9A8D4, #C4B5FD);
+      border-radius: 50%;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .header-nav a {
+      font-size: 13px;
+      font-weight: 600;
+      color: #7A7A9A;
+      padding: 8px 18px;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+
+    .header-nav a:hover {
+      background: #fff;
+      color: #F9A8D4;
+      box-shadow: 0 2px 20px rgba(249,168,212,0.2);
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .hero-clouds {
+      font-size: 14px;
+      color: #C4B5FD;
+      margin-bottom: 16px;
+      letter-spacing: 8px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #F9A8D4, #C4B5FD, #93E0C8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: #9A9AB0;
+      font-weight: 500;
+      margin-bottom: 36px;
+    }
+
+    .search-wrapper {
+      max-width: 520px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 16px 24px 16px 52px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      border: 2px solid #F3E8FF;
+      border-radius: 50px;
+      outline: none;
+      background: #fff;
+      color: #4A4A4A;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 20px rgba(249,168,212,0.08);
+    }
+
+    .search-input::placeholder {
+      color: #C4B5FD;
+    }
+
+    .search-input:focus {
+      border-color: #F9A8D4;
+      box-shadow: 0 4px 30px rgba(249,168,212,0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: #C4B5FD;
+    }
+
+    /* Products */
+    .products {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    .section-header {
+      margin-bottom: 24px;
+    }
+
+    .section-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #6A6A8A;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+      transition: all 0.35s ease;
+      border: 2px solid transparent;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 40px rgba(249,168,212,0.12);
+      border-color: #F3E8FF;
+    }
+
+    .product-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #5A5A7A;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .product-name .pill {
+      font-size: 10px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #F9A8D4, #C4B5FD);
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 50px;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      color: #9A9AB0;
+      margin-bottom: 24px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .category-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .category-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #FFF5F7, #F3E8FF);
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #5A5A7A;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .category-link:hover {
+      background: linear-gradient(135deg, #F9A8D4, #C4B5FD);
+      color: #fff;
+      transform: translateX(4px);
+    }
+
+    .category-link .cat-arrow {
+      font-size: 14px;
+      color: #C4B5FD;
+      transition: all 0.3s ease;
+    }
+
+    .category-link:hover .cat-arrow {
+      color: #fff;
+    }
+
+    /* Divider */
+    .divider {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      text-align: center;
+    }
+
+    .divider-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .divider-dots span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #F3E8FF;
+    }
+
+    .divider-dots span:nth-child(2) {
+      background: #F9A8D4;
+      width: 8px;
+      height: 8px;
+    }
+
+    .divider-dots span:nth-child(4) {
+      background: #C4B5FD;
+      width: 8px;
+      height: 8px;
+    }
+
+    /* Popular Questions */
+    .popular {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .faq-item {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.03);
+      transition: all 0.3s ease;
+      border: 1px solid #F3E8FF;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 4px 28px rgba(249,168,212,0.1);
+      border-color: #F9A8D4;
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #4A4A4A;
+      transition: color 0.2s ease;
+    }
+
+    .faq-question:hover {
+      color: #F9A8D4;
+    }
+
+    .faq-product-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #F9A8D4, #C4B5FD);
+      padding: 2px 10px;
+      border-radius: 50px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .faq-question .toggle {
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, #FFF5F7, #F3E8FF);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #C4B5FD;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-question .toggle {
+      background: linear-gradient(135deg, #F9A8D4, #C4B5FD);
+      color: #fff;
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-answer p {
+      padding: 0 24px 20px;
+      font-size: 13px;
+      color: #9A9AB0;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      border-top: 1px solid #F3E8FF;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: #C4B5FD;
+      font-weight: 600;
+    }
+
+    .footer-tagline {
+      font-size: 12px;
+      color: #C4B5FD;
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 40px 24px 32px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .header-nav {
+        gap: 4px;
+      }
+
+      .section-header h2 {
+        font-size: 20px;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .header {
+        padding: 16px;
+      }
+
+      .hero {
+        padding: 28px 16px 24px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .products {
+        padding: 0 16px 48px;
+      }
+
+      .popular {
+        padding: 36px 16px 48px;
+      }
+
+      .faq-question {
+        font-size: 13px;
+        padding: 14px 18px;
+      }
+
+      .footer {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo">
+      <span class="dot"></span>
+      AskFlow
+    </div>
+    <nav class="header-nav">
+      <a href="#">Products</a>
+      <a href="#">Guides</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-clouds">&#9729; &#9729; &#9729;</div>
+    <h1>How can we help?</h1>
+    <p>Your knowledge, instantly accessible</p>
+    <div class="search-wrapper">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="M21 21l-4.35-4.35"></path>
+      </svg>
+      <input type="text" class="search-input" placeholder="Search for help articles...">
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products">
+    <div class="section-header">
+      <h2>Browse by product</h2>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="product-name">
+          2drive
+          <span class="pill">Popular</span>
+        </div>
+        <p class="product-desc">The complete package for driving instructors and driving schools</p>
+        <ul class="category-list">
+          <li>
+            <a href="#" class="category-link">
+              Planning &amp; Agenda
+              <span class="cat-arrow">&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="category-link">
+              Billing
+              <span class="cat-arrow">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="product-card">
+        <div class="product-name">
+          2quote
+          <span class="pill">New</span>
+        </div>
+        <p class="product-desc">The smart solution for quotes and order management</p>
+        <ul class="category-list">
+          <li>
+            <a href="#" class="category-link">
+              Quotes
+              <span class="cat-arrow">&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="category-link">
+              Customer Management
+              <span class="cat-arrow">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider-dots">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- Popular Questions -->
+  <section class="popular">
+    <div class="section-header">
+      <h2>Popular questions</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>
+            <span class="faq-product-tag">2drive</span><br>
+            How do I add a new driving lesson?
+          </span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Click on the desired time slot in the agenda. Choose the student and instructor. Save the appointment to confirm.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>
+            <span class="faq-product-tag">2drive</span><br>
+            Can I automatically repeat lessons?
+          </span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, when creating a lesson you can choose the 'Repeat' option. Here you can set the frequency and end date.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>
+            <span class="faq-product-tag">2drive</span><br>
+            How do I send an invoice to a student?
+          </span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Go to the student profile, Invoices tab. Click 'New Invoice' and select the outstanding lessons or packages.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>
+            <span class="faq-product-tag">2quote</span><br>
+            How do I create a new quote?
+          </span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Click the 'New Quote' button in the dashboard. Fill in the customer details and product lines and click send.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>
+            <span class="faq-product-tag">2quote</span><br>
+            Can I import customers from Excel?
+          </span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, go to Customers > Import. Upload your .csv or .xlsx file and map the columns to the correct fields.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-copy">&copy; 2026 AskFlow</span>
+    <span class="footer-tagline">Your knowledge, instantly accessible</span>
+  </footer>
+
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const wasActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      if (!wasActive) {
+        item.classList.add('active');
+      }
+    }
+  </script>
+
+</body>
+</html>

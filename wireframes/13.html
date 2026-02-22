@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brutalist Raw – AskFlow Help Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      color: #000000;
+      background: #FFFFFF;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      border-bottom: 4px solid #000;
+    }
+
+    .header-logo {
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 0;
+    }
+
+    .header-nav a {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #000;
+      padding: 10px 20px;
+      border: 3px solid #000;
+      margin-left: -3px;
+      transition: all 0.15s ease;
+    }
+
+    .header-nav a:first-child {
+      margin-left: 0;
+    }
+
+    .header-nav a:hover {
+      background: #FF0000;
+      color: #fff;
+      border-color: #FF0000;
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 80px 24px 60px;
+    }
+
+    .hero h1 {
+      font-size: 80px;
+      font-weight: 700;
+      line-height: 0.95;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 .red {
+      color: #FF0000;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: #555;
+      font-weight: 500;
+      margin-bottom: 40px;
+      max-width: 500px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .search-wrapper {
+      max-width: 600px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 16px 20px 16px 52px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      border: 4px solid #000;
+      border-radius: 0;
+      outline: none;
+      background: #fff;
+      color: #000;
+      transition: all 0.15s ease;
+    }
+
+    .search-input::placeholder {
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 13px;
+    }
+
+    .search-input:focus {
+      box-shadow: 6px 6px 0 #FF0000;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      color: #000;
+    }
+
+    /* Products */
+    .products {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      color: #FF0000;
+      margin-bottom: 32px;
+      padding: 12px 0;
+      border-bottom: 4px solid #000;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .product-card {
+      border: 3px solid #000;
+      padding: 32px;
+      margin-right: -3px;
+      margin-bottom: -3px;
+      transition: all 0.15s ease;
+    }
+
+    .product-card:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    .product-name {
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .product-card:hover .product-desc {
+      color: #aaa;
+    }
+
+    .category-list {
+      list-style: none;
+    }
+
+    .category-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-top: 2px solid #000;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .product-card:hover .category-link {
+      border-top-color: #444;
+    }
+
+    .category-link:last-child {
+      border-bottom: 2px solid #000;
+    }
+
+    .product-card:hover .category-link:last-child {
+      border-bottom-color: #444;
+    }
+
+    .category-link:hover {
+      color: #FF0000;
+    }
+
+    .product-card:hover .category-link:hover {
+      color: #FF0000;
+    }
+
+    .category-link .cat-arrow {
+      font-size: 18px;
+      font-weight: 700;
+      transition: transform 0.15s ease;
+    }
+
+    .category-link:hover .cat-arrow {
+      transform: translateX(6px);
+    }
+
+    /* Divider */
+    .divider {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .divider hr {
+      border: none;
+      border-top: 4px solid #000;
+    }
+
+    /* Popular Questions */
+    .popular {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .faq-item {
+      border: 3px solid #000;
+      margin-bottom: -3px;
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #000;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.15s ease;
+    }
+
+    .faq-question:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    .faq-product-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      background: #FF0000;
+      padding: 2px 8px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+
+    .faq-question:hover .faq-product-tag {
+      background: #fff;
+      color: #FF0000;
+    }
+
+    .faq-question .toggle {
+      font-size: 24px;
+      font-weight: 700;
+      color: #FF0000;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+      margin-left: 20px;
+    }
+
+    .faq-question:hover .toggle {
+      color: #FF0000;
+    }
+
+    .faq-item.active .faq-question .toggle {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-answer p {
+      padding: 0 24px 20px;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    .footer {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      border-top: 4px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+
+    .footer-tagline {
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 48px 24px 40px;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-card {
+        margin-right: 0;
+      }
+
+      .header-nav a {
+        padding: 8px 12px;
+        font-size: 10px;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .header {
+        padding: 16px;
+      }
+
+      .hero {
+        padding: 32px 16px 28px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 12px;
+      }
+
+      .products {
+        padding: 0 16px 56px;
+      }
+
+      .popular {
+        padding: 48px 16px 56px;
+      }
+
+      .faq-question {
+        font-size: 12px;
+        padding: 14px 16px;
+      }
+
+      .footer {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo">AskFlow</div>
+    <nav class="header-nav">
+      <a href="#">Products</a>
+      <a href="#">Docs</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>How can<br>we <span class="red">help</span>?</h1>
+    <p>Your knowledge, instantly accessible</p>
+    <div class="search-wrapper">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="M21 21l-4.35-4.35"></path>
+      </svg>
+      <input type="text" class="search-input" placeholder="Search articles...">
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products">
+    <div class="section-label">Products</div>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="product-name">2drive</div>
+        <p class="product-desc">The complete package for driving instructors and driving schools</p>
+        <ul class="category-list">
+          <li>
+            <a href="#" class="category-link">
+              Planning &amp; Agenda
+              <span class="cat-arrow">&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="category-link">
+              Billing
+              <span class="cat-arrow">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="product-card">
+        <div class="product-name">2quote</div>
+        <p class="product-desc">The smart solution for quotes and order management</p>
+        <ul class="category-list">
+          <li>
+            <a href="#" class="category-link">
+              Quotes
+              <span class="cat-arrow">&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="category-link">
+              Customer Management
+              <span class="cat-arrow">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"><hr></div>
+
+  <!-- Popular Questions -->
+  <section class="popular">
+    <div class="section-label">Frequently Asked</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>
+            <span class="faq-product-tag">2drive</span><br>
+            How do I add a new driving lesson?
+          </span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Click on the desired time slot in the agenda. Choose the student and instructor. Save the appointment to confirm.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>
+            <span class="faq-product-tag">2drive</span><br>
+            Can I automatically repeat lessons?
+          </span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, when creating a lesson you can choose the 'Repeat' option. Here you can set the frequency and end date.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>
+            <span class="faq-product-tag">2drive</span><br>
+            How do I send an invoice to a student?
+          </span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Go to the student profile, Invoices tab. Click 'New Invoice' and select the outstanding lessons or packages.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>
+            <span class="faq-product-tag">2quote</span><br>
+            How do I create a new quote?
+          </span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Click the 'New Quote' button in the dashboard. Fill in the customer details and product lines and click send.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>
+            <span class="faq-product-tag">2quote</span><br>
+            Can I import customers from Excel?
+          </span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, go to Customers > Import. Upload your .csv or .xlsx file and map the columns to the correct fields.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-copy">&copy; 2026 AskFlow</span>
+    <span class="footer-tagline">Knowledge. Instant. Raw.</span>
+  </footer>
+
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const wasActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      if (!wasActive) {
+        item.classList.add('active');
+      }
+    }
+  </script>
+
+</body>
+</html>

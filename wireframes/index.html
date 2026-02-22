@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskFlow Wireframes — Overview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #111827;
+            background: #f9fafb;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Header ── */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 48px 0 40px;
+            text-align: center;
+        }
+
+        .header-badge {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #6366f1;
+            background: #eef2ff;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 40px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            font-size: 17px;
+            color: #6b7280;
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* ── Grid ── */
+        .grid-section {
+            padding: 48px 0 80px;
+        }
+
+        .wireframe-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .wireframe-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 28px;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .wireframe-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+            border-color: #c7d2fe;
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #e5e7eb;
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .card-arrow {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .wireframe-card:hover .card-arrow {
+            background: #6366f1;
+        }
+
+        .card-arrow svg {
+            width: 16px;
+            height: 16px;
+            stroke: #9ca3af;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.2s;
+        }
+
+        .wireframe-card:hover .card-arrow svg {
+            stroke: #fff;
+        }
+
+        .card-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .card-meta {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .card-font {
+            font-size: 12px;
+            color: #9ca3af;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-font svg {
+            width: 14px;
+            height: 14px;
+            stroke: #9ca3af;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .color-swatches {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            border: 1.5px solid rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+        }
+
+        .swatch-label {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-left: 4px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            padding: 32px 0;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .wireframe-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .wireframe-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 36px 0 28px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .header p {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <span class="header-badge">Design Exploration</span>
+            <h1>AskFlow Wireframes</h1>
+            <p>10 design concepts for the FAQ help center. Click any card to view the full wireframe.</p>
+        </div>
+    </header>
+
+    <!-- Grid -->
+    <section class="grid-section">
+        <div class="container">
+            <div class="wireframe-grid">
+
+                <!-- 01 -->
+                <a href="01.html" class="wireframe-card">
+                    <div class="card-top">
+                        <span class="card-number">01</span>
+                        <span class="card-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </span>
+                    </div>
+                    <div class="card-name">Stripe Minimal</div>
+                    <div class="card-desc">Ultra-clean, content-first design</div>
+                    <div class="card-meta">
+                        <span class="card-font">
+                            <svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+                            Plus Jakarta Sans
+                        </span>
+                        <div class="color-swatches">
+                            <span class="swatch" style="background:#ffffff;"></span>
+                            <span class="swatch" style="background:#0a0a0a;"></span>
+                            <span class="swatch" style="background:#635bff;"></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 02 -->
+                <a href="02.html" class="wireframe-card">
+                    <div class="card-top">
+                        <span class="card-number">02</span>
+                        <span class="card-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </span>
+                    </div>
+                    <div class="card-name">Linear Dashboard</div>
+                    <div class="card-desc">Tool-like, dense, efficient interface</div>
+                    <div class="card-meta">
+                        <span class="card-font">
+                            <svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+                            Inter
+                        </span>
+                        <div class="color-swatches">
+                            <span class="swatch" style="background:#fafafa;"></span>
+                            <span class="swatch" style="background:#18181b;"></span>
+                            <span class="swatch" style="background:#5e6ad2;"></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 03 -->
+                <a href="03.html" class="wireframe-card">
+                    <div class="card-top">
+                        <span class="card-number">03</span>
+                        <span class="card-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </span>
+                    </div>
+                    <div class="card-name">Vercel Dark</div>
+                    <div class="card-desc">Developer-oriented, high-contrast</div>
+                    <div class="card-meta">
+                        <span class="card-font">
+                            <svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+                            Geist Sans / Inter
+                        </span>
+                        <div class="color-swatches">
+                            <span class="swatch" style="background:#000000;"></span>
+                            <span class="swatch" style="background:#ededed;"></span>
+                            <span class="swatch" style="background:#ffffff;"></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 04 -->
+                <a href="04.html" class="wireframe-card">
+                    <div class="card-top">
+                        <span class="card-number">04</span>
+                        <span class="card-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </span>
+                    </div>
+                    <div class="card-name">Notion Clean</div>
+                    <div class="card-desc">Wiki-like, friendly, scannable</div>
+                    <div class="card-meta">
+                        <span class="card-font">
+                            <svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+                            Outfit
+                        </span>
+                        <div class="color-swatches">
+                            <span class="swatch" style="background:#ffffff;"></span>
+                            <span class="swatch" style="background:#37352f;"></span>
+                            <span class="swatch" style="background:#2eaadc;"></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 05 -->
+                <a href="05.html" class="wireframe-card">
+                    <div class="card-top">
+                        <span class="card-number">05</span>
+                        <span class="card-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </span>
+                    </div>
+                    <div class="card-name">Banking Corporate</div>
+                    <div class="card-desc">Enterprise, trustworthy design</div>
+                    <div class="card-meta">
+                        <span class="card-font">
+                            <svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+                            DM Sans
+                        </span>
+                        <div class="color-swatches">
+                            <span class="swatch" style="background:#ffffff;"></span>
+                            <span class="swatch" style="background:#1a1a2e;"></span>
+                            <span class="swatch" style="background:#0066ff;"></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 06 -->
+                <a href="06.html" class="wireframe-card">
+                    <div class="card-top">
+                        <span class="card-number">06</span>
+                        <span class="card-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </span>
+                    </div>
+                    <div class="card-name">Intercom Fresh</div>
+                    <div class="card-desc">SaaS help center, Apple-esque</div>
+                    <div class="card-meta">
+                        <span class="card-font">
+                            <svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+                            Manrope
+                        </span>
+                        <div class="color-swatches">
+                            <span class="swatch" style="background:#ffffff;"></span>
+                            <span class="swatch" style="background:#1d1d1f;"></span>
+                            <span class="swatch" style="background:#0071e3;"></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 07 -->
+                <a href="07.html" class="wireframe-card">
+                    <div class="card-top">
+                        <span class="card-number">07</span>
+                        <span class="card-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </span>
+                    </div>
+                    <div class="card-name">Editorial Grid</div>
+                    <div class="card-desc">Content-forward, editorial layout</div>
+                    <div class="card-meta">
+                        <span class="card-font">
+                            <svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+                            Space Grotesk
+                        </span>
+                        <div class="color-swatches">
+                            <span class="swatch" style="background:#fafaf9;"></span>
+                            <span class="swatch" style="background:#0c0c0c;"></span>
+                            <span class="swatch" style="background:#e11d48;"></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 08 -->
+                <a href="08.html" class="wireframe-card">
+                    <div class="card-top">
+                        <span class="card-number">08</span>
+                        <span class="card-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </span>
+                    </div>
+                    <div class="card-name">Swiss Minimal</div>
+                    <div class="card-desc">Swiss design, type-driven layout</div>
+                    <div class="card-meta">
+                        <span class="card-font">
+                            <svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+                            Instrument Sans
+                        </span>
+                        <div class="color-swatches">
+                            <span class="swatch" style="background:#ffffff;"></span>
+                            <span class="swatch" style="background:#000000;"></span>
+                            <span class="swatch" style="background:#ffffff; border: 1.5px dashed #d1d5db;"></span>
+                            <span class="swatch-label">No accent</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 09 -->
+                <a href="09.html" class="wireframe-card">
+                    <div class="card-top">
+                        <span class="card-number">09</span>
+                        <span class="card-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </span>
+                    </div>
+                    <div class="card-name">Glassmorphism Premium</div>
+                    <div class="card-desc">Premium SaaS, Apple-inspired depth</div>
+                    <div class="card-meta">
+                        <span class="card-font">
+                            <svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+                            Sora
+                        </span>
+                        <div class="color-swatches">
+                            <span class="swatch" style="background: linear-gradient(135deg, #f0f4ff, #faf5ff);"></span>
+                            <span class="swatch" style="background:#111827;"></span>
+                            <span class="swatch" style="background:#4f46e5;"></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 10 -->
+                <a href="10.html" class="wireframe-card">
+                    <div class="card-top">
+                        <span class="card-number">10</span>
+                        <span class="card-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </span>
+                    </div>
+                    <div class="card-name">Startup Bold</div>
+                    <div class="card-desc">Modern startup, fresh, energetic</div>
+                    <div class="card-meta">
+                        <span class="card-font">
+                            <svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+                            Outfit
+                        </span>
+                        <div class="color-swatches">
+                            <span class="swatch" style="background:#ffffff;"></span>
+                            <span class="swatch" style="background:#0f172a;"></span>
+                            <span class="swatch" style="background:#22c55e;"></span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>AskFlow Wireframes &middot; 10 design concepts &middot; 2026</p>
+        </div>
+    </footer>
+
+</body>
+</html>

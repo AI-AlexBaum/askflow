@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Cyberpunk FAQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #E0E0E0;
+      background: #0A0A0F;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* Scanline overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 136, 0.015) 2px,
+        rgba(0, 255, 136, 0.015) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Grid pattern background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: #00FF88;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 28px 24px;
+      position: relative;
+      z-index: 1;
+      border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+    }
+
+    .header-logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #00FF88;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.5), 0 0 20px rgba(0, 255, 136, 0.2);
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 32px;
+    }
+
+    .header-nav a {
+      font-size: 14px;
+      font-weight: 600;
+      color: #666;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .header-nav a:hover {
+      color: #00FF88;
+      text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 24px 64px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 72px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      line-height: 1.0;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    }
+
+    .hero h1 span {
+      color: #00FF88;
+      text-shadow: 0 0 30px rgba(0, 255, 136, 0.6), 0 0 60px rgba(0, 255, 136, 0.2);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #888;
+      font-weight: 500;
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .search-wrapper {
+      max-width: 560px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 16px 20px 16px 52px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      background: rgba(0, 255, 136, 0.03);
+      color: #E0E0E0;
+      letter-spacing: 1px;
+    }
+
+    .search-input::placeholder {
+      color: #555;
+    }
+
+    .search-input:focus {
+      border-color: #00FF88;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.15), inset 0 0 15px rgba(0, 255, 136, 0.05);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      color: #00FF88;
+      opacity: 0.6;
+    }
+
+    /* Products */
+    .products {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .product-card {
+      padding: 28px;
+      border: 1px solid rgba(0, 255, 136, 0.12);
+      background: rgba(0, 255, 136, 0.02);
+      position: relative;
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      border-color: rgba(0, 255, 136, 0.4);
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.08);
+    }
+
+    /* Angular corner decorations */
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 16px;
+      height: 16px;
+      border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+      border-left: 1px solid rgba(0, 255, 136, 0.3);
+    }
+
+    .product-name {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .product-name a {
+      color: #00FF88;
+      text-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
+    }
+
+    .product-name .arrow {
+      font-size: 16px;
+      color: rgba(0, 255, 136, 0.4);
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .product-card:hover .product-name .arrow {
+      color: #00FF88;
+      transform: translateX(4px);
+    }
+
+    .product-desc {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 24px;
+      line-height: 1.5;
+      letter-spacing: 0.5px;
+    }
+
+    .category-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .category-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-top: 1px solid rgba(0, 255, 136, 0.08);
+      font-size: 14px;
+      font-weight: 600;
+      color: #999;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .category-link:last-child {
+      border-bottom: 1px solid rgba(0, 255, 136, 0.08);
+    }
+
+    .category-link:hover {
+      color: #00FF88;
+      text-shadow: 0 0 6px rgba(0, 255, 136, 0.3);
+    }
+
+    .category-link .cat-arrow {
+      font-size: 13px;
+      color: rgba(0, 255, 136, 0.3);
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .category-link:hover .cat-arrow {
+      color: #00FF88;
+      transform: translateX(3px);
+    }
+
+    /* Divider */
+    .divider {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .divider hr {
+      border: none;
+      border-top: 1px solid rgba(0, 255, 136, 0.1);
+      box-shadow: 0 0 8px rgba(0, 255, 136, 0.05);
+    }
+
+    /* Popular Questions */
+    .popular {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .popular h2 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      color: #fff;
+    }
+
+    .popular h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: #00FF88;
+      margin-top: 12px;
+      box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .faq-item {
+      border-top: 1px solid rgba(0, 255, 136, 0.08);
+    }
+
+    .faq-item:last-child {
+      border-bottom: 1px solid rgba(0, 255, 136, 0.08);
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #ccc;
+      letter-spacing: 0.5px;
+      transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .faq-question:hover {
+      color: #00FF88;
+      text-shadow: 0 0 6px rgba(0, 255, 136, 0.3);
+    }
+
+    .faq-question .toggle {
+      font-size: 22px;
+      font-weight: 400;
+      color: rgba(0, 255, 136, 0.4);
+      transition: transform 0.3s ease, color 0.2s ease, text-shadow 0.2s ease;
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+
+    .faq-item.active .faq-question .toggle {
+      transform: rotate(45deg);
+      color: #00FF88;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-answer p {
+      padding: 0 0 18px;
+      font-size: 14px;
+      color: #888;
+      line-height: 1.7;
+      letter-spacing: 0.3px;
+    }
+
+    .faq-product-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #00FF88;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 2px;
+      text-shadow: 0 0 6px rgba(0, 255, 136, 0.3);
+    }
+
+    /* Glitch hover effect */
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 1px); }
+      40% { transform: translate(2px, -1px); }
+      60% { transform: translate(-1px, -1px); }
+      80% { transform: translate(1px, 1px); }
+      100% { transform: translate(0); }
+    }
+
+    .product-card:hover .product-name a {
+      animation: glitch 0.3s ease;
+    }
+
+    /* Footer */
+    .footer {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(0, 255, 136, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: #555;
+      letter-spacing: 1px;
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: #555;
+      font-style: italic;
+      letter-spacing: 1px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero { padding: 48px 24px 40px; }
+      .hero h1 { font-size: 42px; letter-spacing: 2px; }
+      .hero p { font-size: 15px; }
+      .products-grid { grid-template-columns: 1fr; gap: 20px; }
+      .header-nav { gap: 20px; }
+      .header-nav a { font-size: 12px; }
+      .popular h2 { font-size: 26px; }
+      .footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (max-width: 390px) {
+      .header { padding: 20px 16px; }
+      .header-nav { gap: 16px; }
+      .hero { padding: 36px 16px 32px; }
+      .hero h1 { font-size: 34px; letter-spacing: 1px; }
+      .hero p { font-size: 14px; margin-bottom: 28px; }
+      .search-input { font-size: 14px; padding: 14px 16px 14px 44px; }
+      .products { padding: 0 16px 56px; }
+      .product-card { padding: 20px; }
+      .popular { padding: 48px 16px 56px; }
+      .popular h2 { font-size: 22px; margin-bottom: 24px; }
+      .faq-question { font-size: 14px; padding: 16px 0; }
+      .divider { padding: 0 16px; }
+      .footer { padding: 32px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo">AskFlow</div>
+    <nav class="header-nav">
+      <a href="#">Products</a>
+      <a href="#">Docs</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>How can we <span>help</span>?</h1>
+    <p>Your knowledge, instantly accessible</p>
+    <div class="search-wrapper">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="M21 21l-4.35-4.35"></path>
+      </svg>
+      <input type="text" class="search-input" placeholder="Search the database...">
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products">
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-name">
+          <a href="#">2drive</a>
+          <span class="arrow">&rarr;</span>
+        </div>
+        <p class="product-desc">The complete package for driving instructors and driving schools</p>
+        <ul class="category-list">
+          <li><a href="#" class="category-link">Planning &amp; Agenda<span class="cat-arrow">&rarr;</span></a></li>
+          <li><a href="#" class="category-link">Billing<span class="cat-arrow">&rarr;</span></a></li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-name">
+          <a href="#">2quote</a>
+          <span class="arrow">&rarr;</span>
+        </div>
+        <p class="product-desc">The smart solution for quotes and order management</p>
+        <ul class="category-list">
+          <li><a href="#" class="category-link">Quotes<span class="cat-arrow">&rarr;</span></a></li>
+          <li><a href="#" class="category-link">Customer Management<span class="cat-arrow">&rarr;</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"><hr></div>
+
+  <!-- Popular Questions -->
+  <section class="popular">
+    <h2>Frequent Queries</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2drive</span><br>How do I add a new driving lesson?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Click on the desired time slot in the agenda. Choose the student and instructor. Save the appointment to confirm.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2drive</span><br>Can I automatically repeat lessons?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Yes, when creating a lesson you can choose the 'Repeat' option. Here you can set the frequency and end date.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2drive</span><br>How do I link an instructor to a vehicle?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Go to Settings > Instructors. Select the instructor and choose the default vehicle from the dropdown menu.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2quote</span><br>How do I create a new quote?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Click the 'New Quote' button in the dashboard. Fill in the customer details and product lines and click send.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2quote</span><br>Can I import customers from Excel?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Yes, go to Customers > Import. Upload your .csv or .xlsx file and map the columns to the correct fields.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-copy">&copy; 2026 AskFlow</span>
+    <span class="footer-tagline">Your knowledge, instantly accessible</span>
+  </footer>
+
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const wasActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(function(el) { el.classList.remove('active'); });
+      if (!wasActive) item.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

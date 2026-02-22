@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AskFlow Help Center - Editorial Grid</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --bg: #fafaf9;
+    --text: #0c0c0c;
+    --accent: #e11d48;
+    --accent-light: #fff1f2;
+    --gray-100: #f5f5f4;
+    --gray-200: #e7e5e4;
+    --gray-300: #d6d3d1;
+    --gray-400: #a8a29e;
+    --gray-500: #78716c;
+    --gray-600: #57534e;
+    --radius: 8px;
+    --radius-lg: 16px;
+    --max-width: 1280px;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Nav ── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250, 250, 249, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .nav-logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-600);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--text);
+  }
+
+  .nav-search {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .nav-search input {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    padding: 8px 14px 8px 36px;
+    border: 1px solid var(--gray-300);
+    border-radius: 100px;
+    background: #fff;
+    color: var(--text);
+    width: 240px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, width 0.3s;
+  }
+
+  .nav-search input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.1);
+    width: 300px;
+  }
+
+  .nav-search svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--gray-400);
+    pointer-events: none;
+  }
+
+  /* ── Main ── */
+  .main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+  }
+
+  /* ── Section header ── */
+  .section-header {
+    margin-bottom: 24px;
+  }
+
+  .section-header h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gray-500);
+  }
+
+  /* ── Product Grid ── */
+  .product-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+
+  /* Featured card (2drive) */
+  .card-featured {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-200);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    transition: box-shadow 0.3s;
+  }
+
+  .card-featured:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  }
+
+  .card-featured-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .card-product-name {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  .card-product-badge {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 4px 12px;
+    border-radius: 100px;
+    flex-shrink: 0;
+  }
+
+  .card-product-desc {
+    font-size: 16px;
+    color: var(--gray-600);
+    line-height: 1.6;
+    max-width: 520px;
+  }
+
+  .card-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-600);
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    padding: 6px 14px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .pill:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  .pill svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .card-featured-faq {
+    background: var(--gray-100);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+  }
+
+  .card-featured-faq-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .card-featured-faq-q {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .card-featured-faq-a {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+
+  .card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    align-self: flex-start;
+  }
+
+  .card-cta:hover {
+    background: #be123c;
+    transform: translateY(-1px);
+  }
+
+  .card-cta svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Compact card (2quote) */
+  .card-compact {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-200);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: box-shadow 0.3s;
+  }
+
+  .card-compact:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  }
+
+  .card-compact .card-product-name {
+    font-size: 24px;
+  }
+
+  .card-compact .card-product-desc {
+    font-size: 14px;
+  }
+
+  .card-compact-faq {
+    border-top: 1px solid var(--gray-200);
+    padding-top: 16px;
+    margin-top: auto;
+  }
+
+  .card-compact-faq-q {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .card-compact-faq-a {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.5;
+  }
+
+  .card-compact .card-cta {
+    font-size: 13px;
+    padding: 10px 20px;
+  }
+
+  /* ── Latest Articles ── */
+  .articles-section {
+    margin-top: 16px;
+  }
+
+  .articles-list {
+    list-style: none;
+  }
+
+  .article-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--gray-200);
+    cursor: pointer;
+    transition: padding-left 0.2s;
+  }
+
+  .article-row:first-child {
+    border-top: 1px solid var(--gray-200);
+  }
+
+  .article-row:hover {
+    padding-left: 8px;
+  }
+
+  .article-row:hover .article-title {
+    color: var(--accent);
+  }
+
+  .article-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .article-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    transition: color 0.2s;
+    letter-spacing: -0.2px;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .article-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-product {
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+
+  .tag-category {
+    background: var(--gray-100);
+    color: var(--gray-600);
+    border: 1px solid var(--gray-200);
+  }
+
+  .article-time {
+    font-size: 13px;
+    color: var(--gray-400);
+    margin-left: 4px;
+  }
+
+  .article-arrow {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--gray-300);
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .article-row:hover .article-arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--text);
+    color: #fff;
+    margin-top: 40px;
+  }
+
+  .footer-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 64px 32px 40px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand-name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .footer-brand-desc {
+    font-size: 14px;
+    color: var(--gray-400);
+    line-height: 1.6;
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gray-400);
+    margin-bottom: 16px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+  }
+
+  .footer-col li {
+    margin-bottom: 10px;
+  }
+
+  .footer-col a {
+    font-size: 14px;
+    color: var(--gray-300);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover {
+    color: #fff;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: var(--gray-500);
+  }
+
+  .footer-bottom-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+  }
+
+  .footer-bottom-links a {
+    font-size: 13px;
+    color: var(--gray-500);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-bottom-links a:hover {
+    color: #fff;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .nav-inner {
+      padding: 0 16px;
+      height: 56px;
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .nav-search input {
+      width: 160px;
+    }
+
+    .nav-search input:focus {
+      width: 200px;
+    }
+
+    .main {
+      padding: 24px 16px 60px;
+    }
+
+    .product-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .card-featured {
+      padding: 24px;
+      gap: 20px;
+    }
+
+    .card-product-name {
+      font-size: 24px;
+    }
+
+    .card-product-desc {
+      font-size: 14px;
+    }
+
+    .card-featured-faq {
+      padding: 16px;
+    }
+
+    .card-compact {
+      padding: 24px;
+    }
+
+    .article-row {
+      padding: 20px 0;
+    }
+
+    .article-title {
+      font-size: 16px;
+    }
+
+    .article-meta {
+      gap: 6px;
+    }
+
+    .footer-inner {
+      padding: 40px 16px 32px;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .nav-search input {
+      width: 140px;
+    }
+
+    .nav-search input:focus {
+      width: 170px;
+    }
+
+    .card-featured {
+      padding: 20px;
+    }
+
+    .card-featured-top {
+      flex-direction: column;
+    }
+
+    .card-product-name {
+      font-size: 22px;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">AskFlow</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="nav-search">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+        <input type="text" placeholder="Search articles...">
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Main -->
+<main class="main">
+
+  <!-- Product Grid -->
+  <div class="section-header">
+    <h2>Products</h2>
+  </div>
+  <div class="product-grid">
+
+    <!-- Featured: 2drive -->
+    <div class="card-featured">
+      <div class="card-featured-top">
+        <div>
+          <h2 class="card-product-name">2drive</h2>
+          <p class="card-product-desc">The complete package for driving instructors and driving schools</p>
+        </div>
+        <span class="card-product-badge">Featured</span>
+      </div>
+      <div class="card-pills">
+        <a class="pill" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+          Planning &amp; Agenda
+        </a>
+        <a class="pill" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
+          Billing
+        </a>
+      </div>
+      <div class="card-featured-faq">
+        <div class="card-featured-faq-label">Popular Question</div>
+        <div class="card-featured-faq-q">How do I add a new driving lesson?</div>
+        <div class="card-featured-faq-a">Click on the desired time slot in the agenda. Choose the student and instructor. Save the appointment to confirm.</div>
+      </div>
+      <a href="#" class="card-cta">
+        Browse 2drive articles
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+      </a>
+    </div>
+
+    <!-- Compact: 2quote -->
+    <div class="card-compact">
+      <div>
+        <h2 class="card-product-name">2quote</h2>
+        <p class="card-product-desc">The smart solution for quotes and order management</p>
+      </div>
+      <div class="card-pills">
+        <a class="pill" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+          Quotes
+        </a>
+        <a class="pill" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+          Customer Management
+        </a>
+      </div>
+      <div class="card-compact-faq">
+        <div class="card-compact-faq-q">How do I create a new quote?</div>
+        <div class="card-compact-faq-a">Click the 'New Quote' button in the dashboard. Fill in the customer details and product lines and click send.</div>
+      </div>
+      <a href="#" class="card-cta">
+        Browse 2quote articles
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Latest Articles -->
+  <div class="articles-section">
+    <div class="section-header">
+      <h2>Latest Articles</h2>
+    </div>
+    <ul class="articles-list">
+
+      <li class="article-row">
+        <div class="article-content">
+          <div class="article-title">How do I add a new driving lesson?</div>
+          <div class="article-meta">
+            <span class="article-tag tag-product">2drive</span>
+            <span class="article-tag tag-category">Agenda Management</span>
+            <span class="article-time">2 min read</span>
+          </div>
+        </div>
+        <svg class="article-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+      </li>
+
+      <li class="article-row">
+        <div class="article-content">
+          <div class="article-title">Can I automatically repeat lessons?</div>
+          <div class="article-meta">
+            <span class="article-tag tag-product">2drive</span>
+            <span class="article-tag tag-category">Agenda Management</span>
+            <span class="article-time">2 min read</span>
+          </div>
+        </div>
+        <svg class="article-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+      </li>
+
+      <li class="article-row">
+        <div class="article-content">
+          <div class="article-title">How do I link an instructor to a vehicle?</div>
+          <div class="article-meta">
+            <span class="article-tag tag-product">2drive</span>
+            <span class="article-tag tag-category">Instructors</span>
+            <span class="article-time">2 min read</span>
+          </div>
+        </div>
+        <svg class="article-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+      </li>
+
+      <li class="article-row">
+        <div class="article-content">
+          <div class="article-title">How do I send an invoice to a student?</div>
+          <div class="article-meta">
+            <span class="article-tag tag-product">2drive</span>
+            <span class="article-tag tag-category">Billing</span>
+            <span class="article-time">2 min read</span>
+          </div>
+        </div>
+        <svg class="article-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+      </li>
+
+      <li class="article-row">
+        <div class="article-content">
+          <div class="article-title">How do I create a new quote?</div>
+          <div class="article-meta">
+            <span class="article-tag tag-product">2quote</span>
+            <span class="article-tag tag-category">Quotes</span>
+            <span class="article-time">2 min read</span>
+          </div>
+        </div>
+        <svg class="article-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+      </li>
+
+      <li class="article-row">
+        <div class="article-content">
+          <div class="article-title">Can I import customers from Excel?</div>
+          <div class="article-meta">
+            <span class="article-tag tag-product">2quote</span>
+            <span class="article-tag tag-category">Customer Management</span>
+            <span class="article-time">2 min read</span>
+          </div>
+        </div>
+        <svg class="article-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+      </li>
+
+    </ul>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">AskFlow</div>
+        <p class="footer-brand-desc">Your knowledge, instantly accessible. Find answers to all your questions about our products.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#">2drive</a></li>
+          <li><a href="#">2quote</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Getting Started</a></li>
+          <li><a href="#">API Docs</a></li>
+          <li><a href="#">Release Notes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Status</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 AskFlow. All rights reserved.</span>
+      <ul class="footer-bottom-links">
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

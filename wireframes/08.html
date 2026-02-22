@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AskFlow Help Center - Swiss Minimal</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --black: #000000;
+    --white: #ffffff;
+    --gray-mid: #767676;
+    --gray-light: #e0e0e0;
+    --gray-faint: #f5f5f5;
+    --max-width: 1080px;
+    --gutter: 32px;
+    --rule: 2px solid var(--black);
+    --rule-thin: 1px solid var(--gray-light);
+  }
+
+  body {
+    font-family: 'Instrument Sans', 'Inter', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Nav ── */
+  .nav {
+    border-bottom: 1px solid var(--black);
+  }
+
+  .nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--black);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .nav-links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 80px var(--gutter) 60px;
+    border-bottom: var(--rule);
+  }
+
+  .hero h1 {
+    font-size: 84px;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    max-width: 800px;
+  }
+
+  .hero-search {
+    margin-top: 48px;
+    max-width: 480px;
+  }
+
+  .hero-search input {
+    font-family: 'Instrument Sans', 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-bottom: 1px solid var(--black);
+    background: transparent;
+    color: var(--black);
+    outline: none;
+  }
+
+  .hero-search input::placeholder {
+    color: var(--gray-mid);
+  }
+
+  /* ── Products ── */
+  .products {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .product-section {
+    padding: 48px 0;
+    border-bottom: var(--rule);
+  }
+
+  .product-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .product-name {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  .product-desc {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--gray-mid);
+    max-width: 480px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .product-categories {
+    font-size: 14px;
+    color: var(--black);
+  }
+
+  .product-categories span {
+    font-weight: 400;
+  }
+
+  .cat-separator {
+    margin: 0 10px;
+    color: var(--gray-mid);
+  }
+
+  /* ── FAQ Accordion ── */
+  .faq-section {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 64px var(--gutter) 80px;
+  }
+
+  .faq-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+  }
+
+  /* Checkbox-hack accordion */
+  .accordion {
+    border-top: 1px solid var(--black);
+  }
+
+  .accordion-item {
+    border-bottom: 1px solid var(--black);
+  }
+
+  .accordion-toggle {
+    display: none;
+  }
+
+  .accordion-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    cursor: pointer;
+    user-select: none;
+    transition: padding-left 0.2s;
+  }
+
+  .accordion-label:hover {
+    padding-left: 8px;
+  }
+
+  .accordion-question {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+    flex: 1;
+    padding-right: 24px;
+  }
+
+  .accordion-product {
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-mid);
+    margin-right: 24px;
+    flex-shrink: 0;
+  }
+
+  .accordion-icon {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .accordion-icon::before {
+    content: '+';
+  }
+
+  .accordion-toggle:checked ~ .accordion-label .accordion-icon::before {
+    content: '\2212';
+  }
+
+  .accordion-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  .accordion-toggle:checked ~ .accordion-answer {
+    max-height: 300px;
+  }
+
+  .accordion-answer-inner {
+    padding: 0 0 24px 0;
+    border-left: 2px solid var(--black);
+    margin-left: 0;
+    padding-left: 20px;
+  }
+
+  .accordion-answer-text {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--gray-mid);
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  .accordion-answer-category {
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-mid);
+    margin-top: 12px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    border-top: 1px solid var(--black);
+    padding: 24px var(--gutter);
+    text-align: center;
+  }
+
+  .footer p {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--gray-mid);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    :root {
+      --gutter: 20px;
+    }
+
+    .nav-inner {
+      height: 48px;
+    }
+
+    .nav-links {
+      gap: 20px;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+    }
+
+    .hero {
+      padding: 48px var(--gutter) 40px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      letter-spacing: -1px;
+    }
+
+    .hero-search {
+      margin-top: 32px;
+    }
+
+    .product-section {
+      padding: 32px 0;
+    }
+
+    .product-header {
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .product-name {
+      font-size: 28px;
+    }
+
+    .product-desc {
+      font-size: 15px;
+    }
+
+    .faq-section {
+      padding: 40px var(--gutter) 60px;
+    }
+
+    .accordion-label {
+      padding: 16px 0;
+    }
+
+    .accordion-question {
+      font-size: 16px;
+    }
+
+    .accordion-product {
+      display: none;
+    }
+  }
+
+  @media (max-width: 390px) {
+    :root {
+      --gutter: 16px;
+    }
+
+    .nav-links {
+      gap: 16px;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-search input {
+      font-size: 15px;
+    }
+
+    .product-name {
+      font-size: 24px;
+    }
+
+    .product-categories {
+      font-size: 13px;
+    }
+
+    .cat-separator {
+      margin: 0 6px;
+    }
+
+    .accordion-question {
+      font-size: 15px;
+    }
+
+    .faq-section-title {
+      font-size: 12px;
+      margin-bottom: 28px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">ASKFLOW</a>
+    <ul class="nav-links">
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Help</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>How can we help?</h1>
+  <div class="hero-search">
+    <input type="text" placeholder="Type your question">
+  </div>
+</section>
+
+<!-- Products -->
+<section class="products">
+
+  <!-- 2drive -->
+  <div class="product-section">
+    <div class="product-header">
+      <h2 class="product-name">2drive</h2>
+    </div>
+    <p class="product-desc">The complete package for driving instructors and driving schools</p>
+    <div class="product-categories">
+      <span>Planning &amp; Agenda</span>
+      <span class="cat-separator">&bull;</span>
+      <span>Billing</span>
+    </div>
+  </div>
+
+  <!-- 2quote -->
+  <div class="product-section">
+    <div class="product-header">
+      <h2 class="product-name">2quote</h2>
+    </div>
+    <p class="product-desc">The smart solution for quotes and order management</p>
+    <div class="product-categories">
+      <span>Quotes</span>
+      <span class="cat-separator">&bull;</span>
+      <span>Customer Management</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- FAQ Accordion -->
+<section class="faq-section">
+  <h2 class="faq-section-title">Frequently Asked Questions</h2>
+
+  <div class="accordion">
+
+    <!-- Q1 -->
+    <div class="accordion-item">
+      <input type="checkbox" id="faq-1" class="accordion-toggle">
+      <label for="faq-1" class="accordion-label">
+        <span class="accordion-question">How do I add a new driving lesson?</span>
+        <span class="accordion-product">2drive</span>
+        <span class="accordion-icon"></span>
+      </label>
+      <div class="accordion-answer">
+        <div class="accordion-answer-inner">
+          <p class="accordion-answer-text">Click on the desired time slot in the agenda. Choose the student and instructor. Save the appointment to confirm.</p>
+          <p class="accordion-answer-category">Planning &amp; Agenda &mdash; Agenda Management</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="accordion-item">
+      <input type="checkbox" id="faq-2" class="accordion-toggle">
+      <label for="faq-2" class="accordion-label">
+        <span class="accordion-question">Can I automatically repeat lessons?</span>
+        <span class="accordion-product">2drive</span>
+        <span class="accordion-icon"></span>
+      </label>
+      <div class="accordion-answer">
+        <div class="accordion-answer-inner">
+          <p class="accordion-answer-text">Yes, when creating a lesson you can choose the 'Repeat' option. Here you can set the frequency and end date.</p>
+          <p class="accordion-answer-category">Planning &amp; Agenda &mdash; Agenda Management</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="accordion-item">
+      <input type="checkbox" id="faq-3" class="accordion-toggle">
+      <label for="faq-3" class="accordion-label">
+        <span class="accordion-question">How do I link an instructor to a vehicle?</span>
+        <span class="accordion-product">2drive</span>
+        <span class="accordion-icon"></span>
+      </label>
+      <div class="accordion-answer">
+        <div class="accordion-answer-inner">
+          <p class="accordion-answer-text">Go to Settings > Instructors. Select the instructor and choose the default vehicle from the dropdown menu.</p>
+          <p class="accordion-answer-category">Planning &amp; Agenda &mdash; Instructors</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="accordion-item">
+      <input type="checkbox" id="faq-4" class="accordion-toggle">
+      <label for="faq-4" class="accordion-label">
+        <span class="accordion-question">How do I send an invoice to a student?</span>
+        <span class="accordion-product">2drive</span>
+        <span class="accordion-icon"></span>
+      </label>
+      <div class="accordion-answer">
+        <div class="accordion-answer-inner">
+          <p class="accordion-answer-text">Go to the student profile, Invoices tab. Click 'New Invoice' and select the outstanding lessons or packages.</p>
+          <p class="accordion-answer-category">Billing</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="accordion-item">
+      <input type="checkbox" id="faq-5" class="accordion-toggle">
+      <label for="faq-5" class="accordion-label">
+        <span class="accordion-question">How do I create a new quote?</span>
+        <span class="accordion-product">2quote</span>
+        <span class="accordion-icon"></span>
+      </label>
+      <div class="accordion-answer">
+        <div class="accordion-answer-inner">
+          <p class="accordion-answer-text">Click the 'New Quote' button in the dashboard. Fill in the customer details and product lines and click send.</p>
+          <p class="accordion-answer-category">Quotes</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="accordion-item">
+      <input type="checkbox" id="faq-6" class="accordion-toggle">
+      <label for="faq-6" class="accordion-label">
+        <span class="accordion-question">Can I import customers from Excel?</span>
+        <span class="accordion-product">2quote</span>
+        <span class="accordion-icon"></span>
+      </label>
+      <div class="accordion-answer">
+        <div class="accordion-answer-inner">
+          <p class="accordion-answer-text">Yes, go to Customers > Import. Upload your .csv or .xlsx file and map the columns to the correct fields.</p>
+          <p class="accordion-answer-category">Customer Management</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2026 AskFlow</p>
+</footer>
+
+</body>
+</html>

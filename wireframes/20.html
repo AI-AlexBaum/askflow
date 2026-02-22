@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zen Garden FAQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Serif JP', Georgia, 'Times New Roman', serif;
+      color: #2C2C2C;
+      background: #FAF9F6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 2;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #6B8E6B;
+    }
+
+    /* Decorative nature elements */
+    .leaf-deco {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.04;
+    }
+
+    .leaf-deco-1 {
+      top: 10%;
+      right: 5%;
+      width: 200px;
+      height: 200px;
+      border: 2px solid #6B8E6B;
+      border-radius: 0 100% 0 100%;
+    }
+
+    .leaf-deco-2 {
+      bottom: 15%;
+      left: 3%;
+      width: 150px;
+      height: 150px;
+      border: 2px solid #6B8E6B;
+      border-radius: 100% 0 100% 0;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-logo {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #2C2C2C;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 40px;
+    }
+
+    .header-nav a {
+      font-size: 13px;
+      font-weight: 500;
+      color: #999;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    .header-nav a:hover {
+      color: #6B8E6B;
+    }
+
+    /* Horizontal rule - bamboo style */
+    .bamboo-rule {
+      display: block;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bamboo-rule hr {
+      border: none;
+      height: 1px;
+      background: #E0DDD5;
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 32px 100px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-decoration {
+      font-size: 32px;
+      color: #6B8E6B;
+      opacity: 0.3;
+      margin-bottom: 40px;
+      letter-spacing: 24px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 32px;
+      color: #2C2C2C;
+      letter-spacing: 2px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: #999;
+      font-weight: 400;
+      margin-bottom: 64px;
+      letter-spacing: 1px;
+    }
+
+    .search-wrapper {
+      max-width: 420px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 18px 24px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 15px;
+      border: none;
+      border-bottom: 1px solid #D8D5CC;
+      border-radius: 0;
+      outline: none;
+      transition: border-color 0.4s ease;
+      background: transparent;
+      color: #2C2C2C;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    .search-input::placeholder {
+      color: #C0BDB5;
+      letter-spacing: 2px;
+    }
+
+    .search-input:focus {
+      border-color: #6B8E6B;
+    }
+
+    /* Products */
+    .products {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 32px 120px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+
+    .product-card {
+      padding: 0;
+    }
+
+    .product-name {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      color: #2C2C2C;
+      letter-spacing: 1px;
+    }
+
+    .product-name .arrow {
+      font-size: 16px;
+      color: #C0BDB5;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .product-card:hover .product-name .arrow {
+      color: #6B8E6B;
+      transform: translateX(4px);
+    }
+
+    .product-desc {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 36px;
+      line-height: 1.9;
+    }
+
+    .category-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .category-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      border-top: 1px solid #EAE7E0;
+      font-size: 15px;
+      font-weight: 500;
+      color: #666;
+      transition: color 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .category-link:last-child {
+      border-bottom: 1px solid #EAE7E0;
+    }
+
+    .category-link:hover {
+      color: #6B8E6B;
+    }
+
+    .category-link .cat-arrow {
+      font-size: 13px;
+      color: #D0CDC5;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .category-link:hover .cat-arrow {
+      color: #6B8E6B;
+      transform: translateX(3px);
+    }
+
+    /* Popular Questions */
+    .popular {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 32px 120px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .popular h2 {
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 56px;
+      text-align: center;
+      color: #2C2C2C;
+      letter-spacing: 2px;
+    }
+
+    .popular h2::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: #6B8E6B;
+      margin: 20px auto 0;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .faq-item {
+      border-top: 1px solid #EAE7E0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: 1px solid #EAE7E0;
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #444;
+      transition: color 0.3s ease;
+      letter-spacing: 0.3px;
+    }
+
+    .faq-question:hover {
+      color: #6B8E6B;
+    }
+
+    .faq-question .toggle {
+      font-size: 20px;
+      font-weight: 300;
+      color: #C0BDB5;
+      transition: transform 0.4s ease, color 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 24px;
+    }
+
+    .faq-item.active .faq-question .toggle {
+      transform: rotate(45deg);
+      color: #6B8E6B;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-answer p {
+      padding: 0 0 28px;
+      font-size: 14px;
+      color: #999;
+      line-height: 2;
+    }
+
+    .faq-product-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #6B8E6B;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 4px;
+    }
+
+    /* Footer */
+    .footer {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 32px;
+      border-top: 1px solid #EAE7E0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: #BBB;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: #BBB;
+      font-style: italic;
+      letter-spacing: 0.5px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero { padding: 80px 24px 64px; }
+      .hero h1 { font-size: 34px; letter-spacing: 1px; }
+      .hero p { font-size: 14px; }
+      .products-grid { grid-template-columns: 1fr; gap: 56px; }
+      .header-nav { gap: 24px; }
+      .header-nav a { font-size: 12px; }
+      .popular h2 { font-size: 24px; }
+      .products { padding: 0 24px 80px; }
+      .popular { padding: 64px 24px 80px; }
+      .footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (max-width: 390px) {
+      .header { padding: 28px 20px; }
+      .header-nav { gap: 16px; }
+      .hero { padding: 56px 20px 48px; }
+      .hero h1 { font-size: 28px; }
+      .hero p { font-size: 13px; margin-bottom: 40px; }
+      .hero-decoration { font-size: 24px; margin-bottom: 28px; letter-spacing: 16px; }
+      .search-input { font-size: 14px; padding: 14px 16px; }
+      .products { padding: 0 20px 64px; }
+      .popular { padding: 48px 20px 64px; }
+      .popular h2 { font-size: 22px; margin-bottom: 36px; }
+      .faq-question { font-size: 14px; padding: 22px 0; }
+      .footer { padding: 36px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nature decorations -->
+  <div class="leaf-deco leaf-deco-1"></div>
+  <div class="leaf-deco leaf-deco-2"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo">AskFlow</div>
+    <nav class="header-nav">
+      <a href="#">Products</a>
+      <a href="#">Docs</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-decoration">&#9679; &#9679; &#9679;</div>
+    <h1>How can we help?</h1>
+    <p>Your knowledge, instantly accessible</p>
+    <div class="search-wrapper">
+      <input type="text" class="search-input" placeholder="Search for articles...">
+    </div>
+  </section>
+
+  <!-- Rule -->
+  <div class="bamboo-rule"><hr></div>
+
+  <!-- Products -->
+  <section class="products" style="padding-top: 80px;">
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-name"><a href="#">2drive</a><span class="arrow">&rarr;</span></div>
+        <p class="product-desc">The complete package for driving instructors and driving schools</p>
+        <ul class="category-list">
+          <li><a href="#" class="category-link">Planning &amp; Agenda<span class="cat-arrow">&rarr;</span></a></li>
+          <li><a href="#" class="category-link">Billing<span class="cat-arrow">&rarr;</span></a></li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-name"><a href="#">2quote</a><span class="arrow">&rarr;</span></div>
+        <p class="product-desc">The smart solution for quotes and order management</p>
+        <ul class="category-list">
+          <li><a href="#" class="category-link">Quotes<span class="cat-arrow">&rarr;</span></a></li>
+          <li><a href="#" class="category-link">Customer Management<span class="cat-arrow">&rarr;</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rule -->
+  <div class="bamboo-rule"><hr></div>
+
+  <!-- Popular Questions -->
+  <section class="popular">
+    <h2>Popular Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2drive</span><br>How do I add a new driving lesson?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Click on the desired time slot in the agenda. Choose the student and instructor. Save the appointment to confirm.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2drive</span><br>Can I automatically repeat lessons?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Yes, when creating a lesson you can choose the 'Repeat' option. Here you can set the frequency and end date.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2drive</span><br>How do I link an instructor to a vehicle?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Go to Settings > Instructors. Select the instructor and choose the default vehicle from the dropdown menu.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2quote</span><br>How do I create a new quote?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Click the 'New Quote' button in the dashboard. Fill in the customer details and product lines and click send.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><span class="faq-product-tag">2quote</span><br>Can I import customers from Excel?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-answer"><p>Yes, go to Customers > Import. Upload your .csv or .xlsx file and map the columns to the correct fields.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-copy">&copy; 2026 AskFlow</span>
+    <span class="footer-tagline">Your knowledge, instantly accessible</span>
+  </footer>
+
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const wasActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(function(el) { el.classList.remove('active'); });
+      if (!wasActive) item.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
